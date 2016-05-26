@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -35,7 +37,7 @@ namespace Baibaomen.DevModel.Infrastructure
     /// <summary>
     /// Add ETag support to dynamic output.
     /// </summary>
-    public class ETagHandler : DelegatingHandler
+    class ETagHandler : DelegatingHandler
     {
 
         private List<string> prefixes;
@@ -85,7 +87,7 @@ namespace Baibaomen.DevModel.Infrastructure
                 }
 
                 var hash = MD5.Create().ComputeHash(await response.Content.ReadAsStreamAsync());
-                var etag = $"\"{hash}\"";
+                var etag = $"\"{Convert.ToBase64String(hash)}\"";
                 response.Headers.ETag = new EntityTagHeaderValue(etag);
                 var matchETag = request.Headers.IfNoneMatch.FirstOrDefault();
                 if (matchETag != null && matchETag.Tag == etag)
