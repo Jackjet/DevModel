@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.ApiSite"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.Infrastructure", "Baibaomen.DevModel.Infrastructure\Baibaomen.DevModel.Infrastructure.csproj", "{B8F690DA-2D27-4668-958C-BE04761DB213}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.CA", "Baibaomen.CA\Baibaomen.CA.csproj", "{230FFD0C-4641-4EEA-9085-CC58E17ABC96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{B8F690DA-2D27-4668-958C-BE04761DB213}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8F690DA-2D27-4668-958C-BE04761DB213}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8F690DA-2D27-4668-958C-BE04761DB213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{230FFD0C-4641-4EEA-9085-CC58E17ABC96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230FFD0C-4641-4EEA-9085-CC58E17ABC96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230FFD0C-4641-4EEA-9085-CC58E17ABC96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{230FFD0C-4641-4EEA-9085-CC58E17ABC96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
