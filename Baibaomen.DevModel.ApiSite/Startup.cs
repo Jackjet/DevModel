@@ -28,6 +28,8 @@ namespace Baibaomen.DevModel.ApiSite
             ConfigJson(app, config);
 
             ConfigIdentityServer(app);
+
+            app.UseWebApi(config);
         }
 
         private void ConfigWebApi(IAppBuilder app, HttpConfiguration config)
@@ -52,7 +54,9 @@ namespace Baibaomen.DevModel.ApiSite
         private void ConfigExceptionAndLog(IAppBuilder app, HttpConfiguration config)
         {
             ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-            config.Services.Add(typeof(IExceptionLogger), new HttpExceptionLogger(e => logger.Error("Unhandled exception occurred", e)));
+            config.Services.Add(typeof(IExceptionLogger), new HttpExceptionLogger(e => 
+                logger.Error("Unhandled exception occurred", e)
+            ));
 
             config.Services.Replace(typeof(IExceptionHandler), new UnhandledExceptionHandler());
         }

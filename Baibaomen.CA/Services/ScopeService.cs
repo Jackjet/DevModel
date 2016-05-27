@@ -7,7 +7,7 @@ using IdentityServer3.Core.Models;
 
 namespace Baibaomen.CA
 {
-    static class ScopesService
+    static class ScopeService
     {
         public static List<Scope> Get()
         {

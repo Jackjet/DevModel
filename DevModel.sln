@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.Infrastr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.CA", "Baibaomen.CA\Baibaomen.CA.csproj", "{230FFD0C-4641-4EEA-9085-CC58E17ABC96}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiSite", "ApiSite", "{7B49BC8B-32B2-495A-848B-F8FA136BDE0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.CATest", "Baibaomen.DevModel.CATest\Baibaomen.DevModel.CATest.csproj", "{FE91F70F-366D-44EB-9338-42EC785E6057}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.MVCClientTest", "Baibaomen.DevModel.MVCClientTest\Baibaomen.DevModel.MVCClientTest.csproj", "{4522F819-6D22-4B4F-96B0-235E98900A36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +45,22 @@ Global
 		{230FFD0C-4641-4EEA-9085-CC58E17ABC96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{230FFD0C-4641-4EEA-9085-CC58E17ABC96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{230FFD0C-4641-4EEA-9085-CC58E17ABC96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE91F70F-366D-44EB-9338-42EC785E6057}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE91F70F-366D-44EB-9338-42EC785E6057}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE91F70F-366D-44EB-9338-42EC785E6057}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE91F70F-366D-44EB-9338-42EC785E6057}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4522F819-6D22-4B4F-96B0-235E98900A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4522F819-6D22-4B4F-96B0-235E98900A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4522F819-6D22-4B4F-96B0-235E98900A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4522F819-6D22-4B4F-96B0-235E98900A36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0D6AC8C8-0AF3-4981-9E12-FF1085C1080E} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
+		{CCCDA1FB-F3A8-4B16-ABC8-C59A51EC7EBC} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
+		{07605CEF-9BE4-4C50-832C-79991F4447AF} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
+		{B8F690DA-2D27-4668-958C-BE04761DB213} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
 	EndGlobalSection
 EndGlobal
