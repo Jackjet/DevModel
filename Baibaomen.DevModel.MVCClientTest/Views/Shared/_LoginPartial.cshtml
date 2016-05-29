@@ -3,6 +3,8 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
+    
+    @**The following line does not go well with IdentityServer3.*@
     @*@Html.AntiForgeryToken()*@
 
     <ul class="nav navbar-nav navbar-right">

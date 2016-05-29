@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AuthAttribute.cs" />
     <Compile Include="Handlers\HttpExceptionLogger.cs" />
     <Compile Include="Handlers\UnhandledExceptionHandler.cs" />
     <Compile Include="ActionResults\SimpleBadRequestResult.cs" />

@@ -1,11 +1,7 @@
 ﻿using IdentityServer3.Core.Configuration;
-using IdentityServer3.Core.Services.InMemory;
 using Owin;
 using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
-using IdentityServer3.Core.Models;
 
 namespace Baibaomen.CA
 {
@@ -19,12 +15,11 @@ namespace Baibaomen.CA
                 SigningCertificate = LoadCertificate(),
                 Factory = new IdentityServerServiceFactory()
                             .UseInMemoryClients(ClientService.Get())
-                            .UseInMemoryScopes(ScopeService.Get().Concat(StandardScopes.All))
+                            .UseInMemoryScopes(ScopeService.Get())
                             .UseInMemoryUsers(UserService.Get()),
 
                 RequireSsl = true
             };
-
             app.UseIdentityServer(options);
         }
 

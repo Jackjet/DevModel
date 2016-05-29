@@ -9,15 +9,25 @@ namespace Baibaomen.CA
 {
     static class ScopeService
     {
-        public static List<Scope> Get()
+        public static IEnumerable<Scope> Get()
         {
             return new List<Scope>
             {
                 new Scope
                 {
                     Name = "api1"
+                },
+                new Scope
+                {
+                    Enabled = true,
+                    Name = "roles",
+                    Type = ScopeType.Identity,
+                    Claims = new List<ScopeClaim>
+                    {
+                        new ScopeClaim("role")
+                    }
                 }
-            };
+            }.Concat(StandardScopes.All);
         }
     }
 }
