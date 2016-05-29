@@ -388,11 +388,14 @@ namespace Baibaomen.DevModel.MVCClientTest.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            Request.GetOwinContext().Authentication.SignOut();
+            return Redirect("/");
+
+            //AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            //return RedirectToAction("Index", "Home");
         }
 
         //

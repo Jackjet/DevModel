@@ -17,9 +17,14 @@ namespace Baibaomen.CA
                             .UseInMemoryClients(ClientService.Get())
                             .UseInMemoryScopes(ScopeService.Get())
                             .UseInMemoryUsers(UserService.Get()),
-
                 RequireSsl = true
             };
+
+            //app.Map("/identity", identity =>
+            //{
+            //    identity.UseIdentityServer(options);
+            //});
+
             app.UseIdentityServer(options);
         }
 

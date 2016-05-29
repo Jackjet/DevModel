@@ -21,7 +21,7 @@ namespace Baibaomen.DevModel.MVCClientTest.Controllers
             return View((User as ClaimsPrincipal).Claims);
         }
 
-        [ResourceAuthorize("Read", "ContactDetails")]
+        [ResourceAuthorize("Write", "ContactDetails")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
