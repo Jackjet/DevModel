@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.MVCClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.WebApiClientTest", "Baibaomen.DevModel.WebApiClientTest\Baibaomen.DevModel.WebApiClientTest.csproj", "{78B8AE34-B988-4704-A4DA-F916B2A58992}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.FrontendTest", "Baibaomen.DevModel.FrontendTest\Baibaomen.DevModel.FrontendTest.csproj", "{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{78B8AE34-B988-4704-A4DA-F916B2A58992}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78B8AE34-B988-4704-A4DA-F916B2A58992}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78B8AE34-B988-4704-A4DA-F916B2A58992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,6 +5,7 @@ using Microsoft.Owin.Cors;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
+using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -29,7 +30,25 @@ namespace Baibaomen.DevModel.ApiSite
 
             ConfigIdentityServer(app);
 
+            ConfigSwagger(config);
+
             app.UseWebApi(config);
+        }
+
+        private void ConfigSwagger(HttpConfiguration config)
+        {
+            config.EnableSwagger(c =>
+            {
+                c.SingleApiVersion("v1", "WebAPI");
+                c.IncludeXmlComments(GetXmlCommentsPath());
+            }).EnableSwaggerUi();
+
+        }
+
+        protected static string GetXmlCommentsPath()
+        {
+            return System.String.Format(@"{0}\bin\Baibaomen.DevModel.ApiSite.XML",
+                    System.AppDomain.CurrentDomain.BaseDirectory);
         }
 
         private void ConfigWebApi(IAppBuilder app, HttpConfiguration config)
@@ -47,7 +66,8 @@ namespace Baibaomen.DevModel.ApiSite
             {
                 Authority = ConfigurationManager.AppSettings["CAAddress"],
                 ValidationMode = ValidationMode.ValidationEndpoint,
-                RequiredScopes = new[] { "api1" }
+                RequiredScopes = new[] { "api1" },
+                 
             });
         }
 

@@ -41,9 +41,9 @@ namespace Baibaomen.DevModel.CATest
 
         static void Main(string[] args)
         {
-            CallApi(GetClientToken());
+            //CallApi(GetClientToken());
 
-            CallApi(GetUserToken());
+            //CallApi(GetUserToken());
 
             Console.ReadLine();
         }

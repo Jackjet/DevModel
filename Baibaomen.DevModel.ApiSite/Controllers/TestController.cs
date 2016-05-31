@@ -11,6 +11,7 @@ public class TestController : ApiController
     }
 
     [Route("Echo")]
+    [Authorize]
     public IHttpActionResult GetEcho()
     {
         var caller = User as ClaimsPrincipal;

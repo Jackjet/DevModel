@@ -25,7 +25,8 @@ namespace Baibaomen.CA
                     new Claim(Constants.ClaimTypes.GivenName, "Bob"),
                     new Claim(Constants.ClaimTypes.FamilyName, "Smith"),
                     new Claim(Constants.ClaimTypes.Role, "Geek"),
-                    new Claim(Constants.ClaimTypes.Role, "Foo")
+                    new Claim(Constants.ClaimTypes.Role, "Foo"),
+                    new Claim(Constants.ClaimTypes.Email, "bob.smith@email.com")
                 }
             },
             new InMemoryUser
