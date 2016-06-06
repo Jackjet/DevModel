@@ -19,6 +19,15 @@ namespace Baibaomen.CA
                 },
                 new Scope
                 {
+                    Name = "api"
+                },
+                new Scope
+                {
+                    Description = "Access to file service",
+                    Name = "fileService"
+                },
+                new Scope
+                {
                     Enabled = true,
                     Name = "roles",
                     Type = ScopeType.Identity,

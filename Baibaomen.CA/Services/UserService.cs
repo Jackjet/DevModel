@@ -17,7 +17,7 @@ namespace Baibaomen.CA
         {
             new InMemoryUser
             {
-                Username = "bob",
+                Username = "bob1",
                 Password = "secret",
                 Subject = "1",
                 Claims = new[]

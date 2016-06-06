@@ -4,7 +4,6 @@ using IdentityServer3.Core.Services;
 using IdentityServer3.EntityFramework;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 
 namespace Baibaomen.CA
 {

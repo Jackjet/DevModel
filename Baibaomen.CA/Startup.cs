@@ -21,7 +21,7 @@ namespace Baibaomen.CA
                 //            .UseInMemoryClients(ClientService.Get())
                 //            .UseInMemoryScopes(ScopeService.Get())
                 //            .UseInMemoryUsers(UserService.Get()),
-                Factory = new IdentityServerServiceFactory().Configure(conn),
+                Factory = new IdentityServerServiceFactory().Configure(conn),//.UseInMemoryClients(ClientService.Get()).UseInMemoryScopes(ScopeService.Get()),//.UseInMemoryUsers(UserService.Get()),
                 RequireSsl = true
             };
             

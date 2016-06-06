@@ -56,6 +56,42 @@ namespace Baibaomen.CA
 
                 new Client
                 {
+                    ClientName = "Web User",
+                    ClientId = "web_user",
+                    Enabled = true,
+                    AccessTokenType = AccessTokenType.Reference,
+
+                    Flow = Flows.ResourceOwner,
+
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("C4878BC2-B315-49CC-B6BD-BAA325C8A902".Sha256())
+                    },
+
+                    AllowedScopes = new List<string>
+                    {
+                        "api1"
+                    }
+                },
+
+                new Client
+                {
+                    ClientName = "Web API",
+                    ClientId = "web_api",
+                    Enabled = true,
+                    AccessTokenType = AccessTokenType.Reference,
+
+                    Flow = Flows.ClientCredentials,
+
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("60DAA737-95F7-4910-BD7F-E01B6B2AB8E2".Sha256())
+                    },
+                    AllowAccessToAllScopes = true
+                },
+
+                new Client
+                {
                     Enabled = true,
                     ClientName = "MVC Client",
                     ClientId = "mvc",
