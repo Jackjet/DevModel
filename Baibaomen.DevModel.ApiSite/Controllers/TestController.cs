@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Linq;
+using System.Security.Claims;
 using System.Web.Http;
 
 [RoutePrefix("api/Test")]
@@ -11,28 +12,17 @@ public class TestController : ApiController
     }
 
     [Route("Echo")]
-    [Authorize]
+    [Authorize(Roles = "admin,system")]
     public IHttpActionResult GetEcho()
     {
-        var caller = User as ClaimsPrincipal;
+        var user = User as ClaimsPrincipal;
+        var claims = from c in user.Claims
+                     select new
+                     {
+                         type = c.Type,
+                         value = c.Value
+                     };
 
-        var subjectClaim = caller.FindFirst("sub");
-        if (subjectClaim != null)
-        {
-            return Json(new
-            {
-                message = "OK user",
-                client = caller.FindFirst("client_id").Value,
-                subject = subjectClaim.Value
-            });
-        }
-        else
-        {
-            return Json(new
-            {
-                message = "OK computer",
-                client = caller.FindFirst("client_id").Value
-            });
-        }
+        return Json(claims);
     }
 }

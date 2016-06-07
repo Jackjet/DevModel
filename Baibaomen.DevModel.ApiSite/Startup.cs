@@ -1,7 +1,10 @@
 ﻿using Baibaomen.DevModel.Infrastructure;
+using IdentityModel.Client;
 using IdentityServer3.AccessTokenValidation;
 using log4net;
 using Microsoft.Owin.Cors;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
@@ -9,8 +12,11 @@ using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net.Http.Formatting;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 
@@ -45,7 +51,7 @@ namespace Baibaomen.DevModel.ApiSite
 
         }
 
-        protected static string GetXmlCommentsPath()
+        private static string GetXmlCommentsPath()
         {
             return System.String.Format(@"{0}\bin\Baibaomen.DevModel.ApiSite.XML",
                     System.AppDomain.CurrentDomain.BaseDirectory);
@@ -62,13 +68,25 @@ namespace Baibaomen.DevModel.ApiSite
 
         private void ConfigIdentityServer(IAppBuilder app)
         {
+            JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
+
+            string authority = ConfigurationManager.AppSettings["CA.Address"];
+            
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
-                Authority = ConfigurationManager.AppSettings["CAAddress"],
-                ValidationMode = ValidationMode.ValidationEndpoint,
-                RequiredScopes = new[] { "api1" },
-                 
+                Authority = authority,
+                RequiredScopes = new[] { "api" }
             });
+
+            //// add app local claims per request
+            //app.UseClaimsTransformation(incoming =>
+            //{
+            //    // either add claims to incoming, or create new principal
+            //    var appPrincipal = new ClaimsPrincipal(incoming);
+            //    incoming.Identities.First().AddClaim(new Claim("appSpecific", "some_value"));
+
+            //    return Task.FromResult(appPrincipal);
+            //});
         }
 
         private void ConfigExceptionAndLog(IAppBuilder app, HttpConfiguration config)

@@ -29,7 +29,7 @@ namespace Baibaomen.DevModel.MVCClientTest
 
             app.UseOpenIdConnectAuthentication(new OpenIdConnectAuthenticationOptions
             {
-                Authority = "https://localhost:44301/identity/",
+                Authority = "https://localhost:44333/core/",
 
                 ClientId = "mvc",
                 Scope = "openid profile roles sampleApi",

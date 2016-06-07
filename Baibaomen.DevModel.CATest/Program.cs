@@ -14,21 +14,21 @@ namespace Baibaomen.DevModel.CATest
         static TokenResponse GetClientToken()
         {
             var client = new TokenClient(
-                "https://localhost:44301/identity/connect/token",
-                "web_api",
-                "60DAA737-95F7-4910-BD7F-E01B6B2AB8E2");
+                "https://localhost:44333/core/connect/token",
+                "web_system",
+                "0D66FECD-2D4F-4947-8483-9E561532E9C9");
 
-            return client.RequestClientCredentialsAsync("api1").Result;
+            return client.RequestClientCredentialsAsync("api").Result;
         }
 
         static TokenResponse GetUserToken()
         {
             var client = new TokenClient(
-                "https://localhost:44301/identity/connect/token",
+                "https://localhost:44333/core/connect/token",
                 "web_user",
-                "C4878BC2-B315-49CC-B6BD-BAA325C8A902");
+                "E066B041-5C34-47E5-9581-A16A27724D0C");
 
-            return client.RequestResourceOwnerPasswordAsync("bob", "secret", "profile").Result;
+            return client.RequestResourceOwnerPasswordAsync("bob", "secret", "api").Result;
         }
 
         static void CallApi(TokenResponse response)
@@ -43,7 +43,7 @@ namespace Baibaomen.DevModel.CATest
         {
             //CallApi(GetClientToken());
 
-            //CallApi(GetUserToken());
+            CallApi(GetUserToken());
 
             Console.ReadLine();
         }

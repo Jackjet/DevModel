@@ -10,6 +10,13 @@ namespace Baibaomen.DevModel.ApiSite.Controllers
     [RoutePrefix("api/login")]
     public class LoginController:ApiController
     {
+        static readonly string CAAddress = System.Configuration.ConfigurationManager.AppSettings["CA.Address"];
+        static readonly string CAUserId = System.Configuration.ConfigurationManager.AppSettings["CA.User.Id"];
+        static readonly string CAUserSecret = System.Configuration.ConfigurationManager.AppSettings["CA.User.Secret"];
+        static readonly string CAUserScopes = System.Configuration.ConfigurationManager.AppSettings["CA.User.Scopes"];
+        static readonly string CASystemId = System.Configuration.ConfigurationManager.AppSettings["CA.System.Id"];
+        static readonly string CASystemSecret = System.Configuration.ConfigurationManager.AppSettings["CA.System.Secret"];
+        static readonly string CASystemScopes = System.Configuration.ConfigurationManager.AppSettings["CA.System.Scopes"];
 
         /// <summary>
         /// Login and get access token.
@@ -23,15 +30,21 @@ namespace Baibaomen.DevModel.ApiSite.Controllers
             var resp = GetUserToken(loginView.Account,loginView.Password);
             return Ok(new { AccessToken = resp.AccessToken});
         }
+
+        //[Route("logout")]
+        //[HttpPost]
+        //public IHttpActionResult Logout() {
+
+        //}
         
         static TokenResponse GetUserToken(string account, string password)
         {
             var client = new TokenClient(
-                "https://localhost:44301/identity/connect/token",
-                "carbon",
-                "21B5F798-BE55-42BC-8AA8-0025B903DC3B");
+                CAAddress + "/connect/token",
+                CAUserId,
+                CAUserSecret);
 
-            return client.RequestResourceOwnerPasswordAsync(account,password, "api1").Result;
+            return client.RequestResourceOwnerPasswordAsync(account,password, CAUserScopes).Result;
         }
     }
 }
