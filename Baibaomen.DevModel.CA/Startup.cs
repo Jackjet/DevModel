@@ -13,22 +13,91 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using Owin;
-using Baibaomen.DevModel.CA.IdSvr;
-using IdentityManager;
-using IdentityManager.Configuration;
-using IdentityServer3.Core.Configuration;
+using Baibaomen.DevModel.ApiSite;
 using Baibaomen.DevModel.CA.IdMgr;
+using Baibaomen.DevModel.CA.IdSvr;
+using Baibaomen.DevModel.Infrastructure;
+using IdentityManager.Configuration;
+using IdentityManager.Core.Logging;
+using IdentityManager.Logging;
+using IdentityServer3.Core.Configuration;
+using log4net;
+using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.Twitter;
-using IdentityManager.Core.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using Owin;
 using Serilog;
-using IdentityManager.Logging;
+using Swashbuckle.Application;
+using System;
+using System.Linq;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
+using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
 
+/// <summary>
+/// Startup class.
+/// </summary>
 public class Startup
 {
+    /// <summary>
+    /// Owin entry point.
+    /// </summary>
+    /// <param name="app"></param>
     public void Configuration(IAppBuilder app)
+    {
+        HttpConfiguration config = new HttpConfiguration();
+
+        ConfigureExceptionAndLog(app, config);
+
+        ConfigureWebApi(app,config);
+
+        ConfigureSwagger(config);
+
+        ConfigureIdentityServer3(app);
+    }
+
+    void ConfigureExceptionAndLog(IAppBuilder app, HttpConfiguration config)
+    {
+        log4net.ILog logger = LogManager.GetLogger("errorlogger");
+        config.Services.Add(typeof(IExceptionLogger), new HttpExceptionLogger(e =>
+            logger.Error("Unhandled exception occurred", e)
+        ));
+
+        config.Services.Replace(typeof(IExceptionHandler), new UnhandledExceptionHandler());
+    }
+
+    void ConfigureWebApi(IAppBuilder app,HttpConfiguration config) {
+
+        // Web API routes
+        config.MapHttpAttributeRoutes();
+
+        // Json formatter
+        var jsonFormatter = config.Formatters.JsonFormatter;
+        jsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+        jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+        jsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+        app.UseCors(CorsOptions.AllowAll);
+
+        app.UseWebApi(config);
+    }
+
+    void ConfigureSwagger(HttpConfiguration config)
+    {
+        config.EnableSwagger(c =>
+        {
+            c.SingleApiVersion("v1", "Baibaomen.DevModel.CA");
+            c.IncludeXmlComments(GetXmlCommentsPath());
+            c.UseFullTypeNameInSchemaIds();
+        }).EnableSwaggerUi("docs/{*assetPath}", c => { c.DocExpansion(DocExpansion.List); });
+
+    }
+
+    void ConfigureIdentityServer3(IAppBuilder app)
     {
         LogProvider.SetCurrentLogProvider(new DiagnosticsTraceLogProvider());
         Log.Logger = new LoggerConfiguration()
@@ -69,7 +138,13 @@ public class Startup
         });
     }
 
-    public static void ConfigureAdditionalIdentityProviders(IAppBuilder app, string signInAsType)
+    string GetXmlCommentsPath()
+    {
+        return System.String.Format(@"{0}\bin\Baibaomen.DevModel.CA.XML",
+                System.AppDomain.CurrentDomain.BaseDirectory);
+    }
+
+    void ConfigureAdditionalIdentityProviders(IAppBuilder app, string signInAsType)
     {
         var google = new GoogleOAuth2AuthenticationOptions
         {
