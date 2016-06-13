@@ -93,7 +93,7 @@ public class Startup
             c.SingleApiVersion("v1", "Baibaomen.DevModel.CA");
             c.IncludeXmlComments(GetXmlCommentsPath());
             c.UseFullTypeNameInSchemaIds();
-        }).EnableSwaggerUi("docs/{*assetPath}", c => { c.DocExpansion(DocExpansion.List); });
+        }).EnableSwaggerUi(c => { c.DocExpansion(DocExpansion.List); });
 
     }
 
