@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Baibaomen.CA")]
+[assembly: AssemblyTitle("Baibaomen.CADemo")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Baibaomen.CA")]
+[assembly: AssemblyProduct("Baibaomen.CADemo")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("38363351-d8c6-4467-9d65-76c65914193b")]
+[assembly: Guid("c0c0fedd-42a5-4606-b226-3c6789aac86c")]
 
 // Version information for an assembly consists of the following four values:
 //
