@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cli", "IdentityServer3.Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.CA", "Baibaomen.DevModel.CA\Baibaomen.DevModel.CA.csproj", "{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.CA", "Baibaomen.CA\Baibaomen.CA.csproj", "{A0CD695A-B4CF-45CD-8913-EC00B6923C02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0CD695A-B4CF-45CD-8913-EC00B6923C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0CD695A-B4CF-45CD-8913-EC00B6923C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0CD695A-B4CF-45CD-8913-EC00B6923C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0CD695A-B4CF-45CD-8913-EC00B6923C02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +93,6 @@ Global
 		{78B8AE34-B988-4704-A4DA-F916B2A58992} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 		{CE220181-1B6C-4FF2-9FD8-018638BF2BB9} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 		{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
+		{A0CD695A-B4CF-45CD-8913-EC00B6923C02} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 	EndGlobalSection
 EndGlobal

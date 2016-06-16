@@ -1,22 +1,22 @@
-﻿using Baibaomen.DevModel.Infrastructure;
-using IdentityModel.Client;
+﻿using Autofac;
+using Autofac.Features.ResolveAnything;
+using Autofac.Integration.WebApi;
+using AutoMapper;
+using Baibaomen.DevModel.ApiSite.AutoMapper;
+using Baibaomen.DevModel.Businsess;
+using Baibaomen.DevModel.Infrastructure;
 using IdentityServer3.AccessTokenValidation;
 using log4net;
 using Microsoft.Owin.Cors;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Owin;
 using Swashbuckle.Application;
-using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net.Http.Formatting;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 
@@ -28,20 +28,45 @@ namespace Baibaomen.DevModel.ApiSite
         {
             HttpConfiguration config = new HttpConfiguration();
 
-            ConfigExceptionAndLog(app, config);
+            ConfigureExceptionAndLog(app, config);
 
-            ConfigWebApi(app, config);
+            ConfigureWebApi(app, config);
 
-            ConfigJson(app, config);
+            ConfigureJson(app, config);
 
-            ConfigIdentityServer(app);
+            //ConfigIdentityServer(app);
 
-            ConfigSwagger(config);
+            ConfigureSwagger(config);
+
+            ConfigureAutoMapper();
+
+            ConfigureAutofac(app, config);
 
             app.UseWebApi(config);
         }
+        
+        private void ConfigureAutofac(IAppBuilder app,HttpConfiguration config)
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterSource(new AnyConcreteTypeNotAlreadyRegisteredSource());
+            builder.RegisterModule(new AutofacModule());
+            builder.RegisterModule(new Businsess.AutofacModule());
 
-        private void ConfigSwagger(HttpConfiguration config)
+            var container = builder.Build();
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            app.UseAutofacMiddleware(container);
+            app.UseAutofacWebApi(config);
+        }
+
+        private void ConfigureAutoMapper()
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<PropertyMapperProfile>();
+            });
+        }
+
+        private void ConfigureSwagger(HttpConfiguration config)
         {
             config.EnableSwagger(c =>
             {
@@ -57,7 +82,7 @@ namespace Baibaomen.DevModel.ApiSite
                     System.AppDomain.CurrentDomain.BaseDirectory);
         }
 
-        private void ConfigWebApi(IAppBuilder app, HttpConfiguration config)
+        private void ConfigureWebApi(IAppBuilder app, HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
 
@@ -89,7 +114,7 @@ namespace Baibaomen.DevModel.ApiSite
             //});
         }
 
-        private void ConfigExceptionAndLog(IAppBuilder app, HttpConfiguration config)
+        private void ConfigureExceptionAndLog(IAppBuilder app, HttpConfiguration config)
         {
             ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
             config.Services.Add(typeof(IExceptionLogger), new HttpExceptionLogger(e => 
@@ -99,7 +124,7 @@ namespace Baibaomen.DevModel.ApiSite
             config.Services.Replace(typeof(IExceptionHandler), new UnhandledExceptionHandler());
         }
 
-        private void ConfigJson(IAppBuilder app,HttpConfiguration config) {
+        private void ConfigureJson(IAppBuilder app,HttpConfiguration config) {
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             jsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;

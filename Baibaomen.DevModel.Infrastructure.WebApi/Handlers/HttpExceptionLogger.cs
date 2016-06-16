@@ -1,8 +1,9 @@
 ﻿using Baibaomen.DevModel.Infrastructure;
 using System;
+using System.Data.Entity.Infrastructure;
 using System.Web.Http.ExceptionHandling;
 
-namespace Baibaomen.DevModel.ApiSite
+namespace Baibaomen.DevModel.Infrastructure
 {
     public class HttpExceptionLogger: ExceptionLogger
     {
@@ -16,7 +17,7 @@ namespace Baibaomen.DevModel.ApiSite
         {
             var exception = context.Exception;
             var exceptionType = exception.GetType();
-            if (exceptionType != typeof(SimpleBadRequestException))
+            if (exceptionType != typeof(SimpleBadRequestException) && exceptionType != typeof(DbUpdateConcurrencyException))
             {
                 exceptionCallback(exception);
             }
