@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Baibaomen.DevModel.Businsess.Entities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -15,8 +16,14 @@ namespace Baibaomen.DevModel.ApiSite.ViewModels
         /// 
         /// </summary>
         [Required]
-        public DateTime CreateTime { get; set; }
+        public string Content { get; set; }
+    }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public class CommunicationUpdateModel
+    {
         /// <summary>
         /// 
         /// </summary>
@@ -26,26 +33,26 @@ namespace Baibaomen.DevModel.ApiSite.ViewModels
         /// <summary>
         /// 
         /// </summary>
-        [Required]
-        public int Creator { get; set; }
-
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class CommunicationUpdateModel : CommunicationBaseModel
-    {
-        /// <summary>
-        /// 
-        /// </summary>
         public byte[] RecordVersion { get; set; }
     }
 
     /// <summary>
     /// Create communication.
     /// </summary>
-    public class CommunicationCreateModel : CommunicationBaseModel { }
+    public class CommunicationCreateModel : CommunicationBaseModel {
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        public int Creator { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        public int PropertyId { get; set; }
+    }
     
     /// <summary>
     /// 
@@ -55,7 +62,25 @@ namespace Baibaomen.DevModel.ApiSite.ViewModels
         /// <summary>
         /// 
         /// </summary>
+        public int Creator { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime CreateTime { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int PropertyId { get; set; }
+
+        //Not suggested. Will cause expanding by default due to serializing.
+        //public Property Property { get; set; }
 
         /// <summary>
         /// 

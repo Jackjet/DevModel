@@ -24,8 +24,8 @@ namespace Baibaomen.DevModel.Businsess.Services
         /// 
         /// </summary>
         /// <returns></returns>
-        public IQueryable<Communication> GetAllCommunications() {
-            return db.Communications;
+        public IQueryable<Property> GetAll() {
+            return db.Properties;
         }
 
         /// <summary>
@@ -33,18 +33,18 @@ namespace Baibaomen.DevModel.Businsess.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Communication GetCommunication(int id) {
-            return db.Communications.Find(id);
+        public Property Get(int id) {
+            return db.Properties.Find(id);
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="communication"></param>
+        /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AddCommunicationAsync(Communication communication) {
-            db.Communications.Add(communication);
-            db.PrepareEntityForEdit(communication);
+        public async Task AddAsync(Property item) {
+            db.Properties.Add(item);
+            db.PrepareEntityToSave(item);
             await db.SaveChangesAsync();
         }
 
@@ -54,12 +54,12 @@ namespace Baibaomen.DevModel.Businsess.Services
         /// <param name="id"></param>
         /// <param name="updateAction"></param>
         /// <returns></returns>
-        public async Task<Communication> UpdateCommunicationAsync(int id,Func<Communication,Communication> updateAction) {
-            var dbData = db.Communications.Find(id);
+        public async Task<Property> UpdateAsync(int id,Func<Property,Property> updateAction) {
+            var dbData = db.Properties.Find(id);
 
             updateAction(dbData);
 
-            db.PrepareEntityForEdit(dbData);
+            db.PrepareEntityToSave(dbData);
             await db.SaveChangesAsync();
 
             return dbData;
@@ -70,8 +70,8 @@ namespace Baibaomen.DevModel.Businsess.Services
         /// </summary>
         /// <param name="communication"></param>
         /// <returns></returns>
-        public async Task DeleteCommunicationAsync(Communication communication) {
-            db.Communications.Remove(communication);
+        public async Task DeleteAsync(Property item) {
+            db.Properties.Remove(item);
             await db.SaveChangesAsync();
         }
     }

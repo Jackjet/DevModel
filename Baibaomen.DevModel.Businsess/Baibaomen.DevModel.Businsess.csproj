@@ -70,6 +70,19 @@
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\Communication.cs" />
     <Compile Include="Entities\Property.cs" />
+    <Compile Include="Migrations\201606151133311_InitialCreate.cs" />
+    <Compile Include="Migrations\201606151133311_InitialCreate.Designer.cs">
+      <DependentUpon>201606151133311_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606170912297_AddConnectionBetweenPropertyAndCommunication.cs" />
+    <Compile Include="Migrations\201606170912297_AddConnectionBetweenPropertyAndCommunication.Designer.cs">
+      <DependentUpon>201606170912297_AddConnectionBetweenPropertyAndCommunication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201606171020327_Update1.cs" />
+    <Compile Include="Migrations\201606171020327_Update1.Designer.cs">
+      <DependentUpon>201606171020327_Update1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MongoDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ErrorMessageResource.Designer.cs">
@@ -77,6 +90,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorMessageResource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Property-CommunicationService.cs" />
     <Compile Include="Services\PropertyService.cs" />
     <Compile Include="SqlDbContext.cs" />
   </ItemGroup>
@@ -95,6 +109,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201606151133311_InitialCreate.resx">
+      <DependentUpon>201606151133311_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606170912297_AddConnectionBetweenPropertyAndCommunication.resx">
+      <DependentUpon>201606170912297_AddConnectionBetweenPropertyAndCommunication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606171020327_Update1.resx">
+      <DependentUpon>201606171020327_Update1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\ErrorMessageResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorMessageResource.Designer.cs</LastGenOutput>

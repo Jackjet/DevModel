@@ -22,8 +22,10 @@ namespace Baibaomen.DevModel.ApiSite.AutoMapper
             CreateMap<Communication, CommunicationViewModel>();
             CreateMap<CommunicationCreateModel, Communication>();
             CreateMap<CommunicationUpdateModel, Communication>();
-            //CreateMap<IQueryable, IQuery<CommunicationViewModel>>();
-            CreateMissingTypeMaps = true;
+
+            CreateMap<Property, PropertyViewModel>();
+            CreateMap<PropertyCreateModel, Property>();
+            CreateMap<PropertyUpdateModel, Property>();
         }
     }
 }

@@ -211,3 +211,7 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 /Baibaomen.CA/App_Data/Log
+/Baibaomen.DevModel.CA/App_Data/Log
+/Baibaomen.DevModel.CA/Log
+/Baibaomen.DevModel.Businsess/Migrations
+/Baibaomen.DevModel.ApiSite/App_Data/Log

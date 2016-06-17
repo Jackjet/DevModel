@@ -45,20 +45,20 @@ namespace Baibaomen.DevModel.ApiSite.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [Route("communication")]
-        [ResponseType(typeof(CommunicationViewModel))]
-        public async Task<IHttpActionResult> Post(CommunicationCreateModel model)
+        [Route("")]
+        [ResponseType(typeof(PropertyViewModel))]
+        public async Task<IHttpActionResult> Post(PropertyCreateModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var communication = Mapper.Map<Communication>(model);
-            await _propertyService.AddCommunicationAsync(communication);
+            var item = Mapper.Map<Property>(model);
+            await _propertyService.AddAsync(item);
 
-            var communicationViewModel = Mapper.Map<CommunicationViewModel>(communication);
-            return CreatedAtRoute("communication", new { id = communication.Id}, communicationViewModel);
+            var viewModel = Mapper.Map<PropertyViewModel>(item);
+            return CreatedAtRoute("property", new { id = item.Id}, viewModel);
         }
 
         /// <summary>
@@ -67,54 +67,52 @@ namespace Baibaomen.DevModel.ApiSite.Controllers
         /// <param name="id"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [Route("communication/{id}")]
-        [ResponseType(typeof(CommunicationViewModel))]
-        public async Task<IHttpActionResult> Put(int id,CommunicationUpdateModel model)
+        [Route("property/{id}")]
+        [ResponseType(typeof(PropertyViewModel))]
+        public async Task<IHttpActionResult> Put(int id,PropertyUpdateModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            var communication = Mapper.Map<Communication>(model);
-
-            var updated = await  _propertyService.UpdateCommunicationAsync(id,x=>Mapper.Map(model,x));
-            return Ok(Mapper.Map<CommunicationViewModel>(updated));
+            
+            var updated = await  _propertyService.UpdateAsync(id,x=>Mapper.Map(model,x));
+            return Ok(Mapper.Map<PropertyViewModel>(updated));
         }
 
         /// <summary>
-        /// Get communication by id.
+        /// Get property by id.
         /// </summary>
         /// <param name="id"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        [Route("{id:int}", Name = "communication")]
-        [ResponseType(typeof(CommunicationViewModel))]
-        public IHttpActionResult Get(int id,ODataQueryOptions<CommunicationViewModel> options)
+        [Route("{id:int}", Name = "property")]
+        [ResponseType(typeof(PropertyViewModel))]
+        public IHttpActionResult Get(int id,ODataQueryOptions<PropertyViewModel> options)
         {
-            var communication = _propertyService.GetCommunication(id);
-            if (communication == null)
+            var item = _propertyService.Get(id);
+            if (item == null)
             {
                 return NotFound();
             }
 
-            var toReturn = Mapper.Map<CommunicationViewModel>(communication);
+            var toReturn = Mapper.Map<PropertyViewModel>(item);
 
             return Json(options.ApplyTo(toReturn,new ODataQuerySettings()));
         }
 
         /// <summary>
-        /// Gets all communications.
+        /// Gets all properties.
         /// </summary>
         /// <param name="options"></param>
         /// <returns></returns>
         [Route("")]
-        [ResponseType(typeof(PagedResult<CommunicationViewModel>))]
-        public IHttpActionResult GetAll(ODataQueryOptions<Communication> options)
+        [ResponseType(typeof(PagedResult<PropertyViewModel>))]
+        public IHttpActionResult GetAll(ODataQueryOptions<Property> options)
         {
-            var communications = _propertyService.GetAllCommunications();
+            var items = _propertyService.GetAll();
             
-            return Ok(options.FilterResult<CommunicationViewModel,Communication>(communications,this,new ODataValidationSettings()));
+            return Ok(options.FilterResult<PropertyViewModel,Property>(items, this,new ODataValidationSettings()));
         }
     }
 }

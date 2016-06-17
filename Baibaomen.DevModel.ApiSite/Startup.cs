@@ -17,6 +17,7 @@ using System.Configuration;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net.Http.Formatting;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 
@@ -116,9 +117,17 @@ namespace Baibaomen.DevModel.ApiSite
 
         private void ConfigureExceptionAndLog(IAppBuilder app, HttpConfiguration config)
         {
-            ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-            config.Services.Add(typeof(IExceptionLogger), new HttpExceptionLogger(e => 
-                logger.Error("Unhandled exception occurred", e)
+            ILog logger = LogManager.GetLogger("logger");
+            config.Services.Add(typeof(IExceptionLogger), new HttpExceptionLogger(e =>
+            {
+                var headers = new List<string>();
+                for (int i = 0; i < HttpContext.Current.Request.Headers.Count; i++)
+                {
+                    headers.Add(HttpContext.Current.Request.Headers.AllKeys[i] + ":" + HttpContext.Current.Request.Headers[i]);
+                }
+
+                logger.Error("Unhandled exception occurred\nURL:\n" + HttpContext.Current.Request.Url + "\nHeaders:\n" + string.Join("\n", headers), e);
+            }
             ));
 
             config.Services.Replace(typeof(IExceptionHandler), new UnhandledExceptionHandler());

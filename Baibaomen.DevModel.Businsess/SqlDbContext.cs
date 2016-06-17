@@ -8,13 +8,19 @@ namespace Baibaomen.DevModel.Businsess
     {
         public SqlDbContext() : base("name=SqlDb")
         {
+            ///Disable lazy loading to bypass the serializing issue.(All related data loaded because of the serializing process). You should call the Load method explicitly.
+            /// refer to :https://msdn.microsoft.com/en-us/data/jj574232.aspx
+            /// how to do explict load on nested element:
+            /// context.Entry(post).Reference(p => p.Blog).Load(); 
+            /// context.Entry(blog).Collection(p => p.Posts).Load(); 
+            Configuration.LazyLoadingEnabled = false;
         }
 
         /// <summary>
         /// Set the CreateTime and UpdateTime; Specify that the record needs concurrency check during update/delete.
         /// </summary>
         /// <param name="entity"></param>
-        public void PrepareEntityForEdit(BaseEntity entity) {
+        public void PrepareEntityToSave(BaseEntity entity) {
             if (entity.CreateTime == default(DateTime)) {
                 entity.CreateTime = DateTime.Now;
             }

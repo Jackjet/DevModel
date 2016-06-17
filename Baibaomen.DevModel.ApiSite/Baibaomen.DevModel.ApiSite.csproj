@@ -162,6 +162,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
       <Private>True</Private>
@@ -195,6 +196,7 @@
   <ItemGroup>
     <Compile Include="Autofac\AutofacModule.cs" />
     <Compile Include="AutoMapper\PropertyMapper.cs" />
+    <Compile Include="Controllers\Property-CommunicationController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\TestController.cs" />
@@ -202,11 +204,13 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CommunicationViewModels.cs" />
     <Compile Include="ViewModels\LoginViews.cs" />
+    <Compile Include="ViewModels\PropertyViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="log4net.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -59,5 +59,14 @@ namespace Baibaomen.DevModel.Businsess.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The specified property id {0} does not exist.
+        /// </summary>
+        internal static string PropertyNotExistForCommunication {
+            get {
+                return ResourceManager.GetString("PropertyNotExistForCommunication", resourceCulture);
+            }
+        }
     }
 }
