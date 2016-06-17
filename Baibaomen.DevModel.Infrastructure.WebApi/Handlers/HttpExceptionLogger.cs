@@ -17,7 +17,7 @@ namespace Baibaomen.DevModel.Infrastructure
         {
             var exception = context.Exception;
             var exceptionType = exception.GetType();
-            if (exceptionType != typeof(SimpleBadRequestException) && exceptionType != typeof(DbUpdateConcurrencyException))
+            //if (exceptionType != typeof(DbUpdateConcurrencyException))
             {
                 exceptionCallback(exception);
             }

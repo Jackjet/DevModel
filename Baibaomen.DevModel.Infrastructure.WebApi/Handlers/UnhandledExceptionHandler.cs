@@ -12,12 +12,7 @@ namespace Baibaomen.DevModel.Infrastructure
         {
             var exception = context.Exception;
             var exceptionType = exception.GetType();
-            if (exceptionType == typeof(SimpleBadRequestException))
-            {
-                var errorMessage = new ErrorMessage { ErrorCode = 0, Message = exception.Message };
-                context.Result = new SimpleBadRequestResult(context.Request, errorMessage);
-            }
-            else if (exceptionType == typeof(SimpleUnauthorizedException))
+            if (exceptionType == typeof(SimpleUnauthorizedException))
             {
                 var authenticationHeaderValues = new List<AuthenticationHeaderValue> { context.Request.Headers.Authorization };
                 context.Result = new UnauthorizedResult(authenticationHeaderValues, context.Request);
