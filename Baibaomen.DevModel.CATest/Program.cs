@@ -36,8 +36,7 @@ namespace Baibaomen.DevModel.CATest
             var client = new HttpClient();
             client.SetBearerToken(response.AccessToken);
 
-            //Console.WriteLine(client.GetStringAsync("http://localhost:9889/api/test/echo").Result);
-            Console.WriteLine(client.GetStringAsync("http://localhost:9996/api/test/echo").Result);
+            Console.WriteLine(client.GetStringAsync("http://localhost:9889/api/test/echo").Result);
         }
 
         static void Main(string[] args)

@@ -41,26 +41,6 @@ namespace IdentityServer3.Host.Config
                     ////////////////////////
                     // resource scopes
                     ////////////////////////
-                    
-                    
-                    //currently only first two are used in production system.
-                    new Scope
-                    {
-                        Name = "api",
-                        DisplayName = "API access",
-                        Type = ScopeType.Resource,
-                        Emphasize = true,
-                        //Claims = "openid name family_name given_name email role".Split(' ').Select(x=>new ScopeClaim(x,true)).ToList(),
-                        IncludeAllClaimsForUser = true
-                    },
-
-                    new Scope
-                    {
-                        Name = "file-service",
-                        DisplayName = "File service access",
-                        Type = ScopeType.Resource,
-                        Emphasize = true
-                    },
 
                     new Scope
                     {
