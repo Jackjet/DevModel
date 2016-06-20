@@ -69,6 +69,7 @@ namespace Baibaomen.DevModel.ApiSite.Controllers
         /// <returns></returns>
         [Route("property/{id}")]
         [ResponseType(typeof(PropertyViewModel))]
+        [Authorize(Roles ="admin,system")]
         public async Task<IHttpActionResult> Put(int id,PropertyUpdateModel model)
         {
             if (!ModelState.IsValid)

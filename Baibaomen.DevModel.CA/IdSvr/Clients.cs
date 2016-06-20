@@ -53,6 +53,32 @@ namespace IdentityServer3.Host.Config
 
                 new Client
                 {
+                    ClientName = "Api document access",
+                    ClientId = "api_doc",
+                    Flow = Flows.Implicit,
+
+                    RedirectUris = new List<string>() { "http://localhost:9889","http://localhost:9889/swagger/ui/o2c-html"},
+
+                    PostLogoutRedirectUris = new List<string>() { "http://localhost:9889"},
+
+                    AllowedScopes = new List<string>() { "api"},
+                    RequireConsent = false,
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("238B3DFC-5AC1-42D7-A705-2B6A3356EFC9".Sha256())
+                    },
+
+                    AccessTokenType = AccessTokenType.Jwt,
+                    AccessTokenLifetime = 3600,
+                    AbsoluteRefreshTokenLifetime = 86400,
+                    SlidingRefreshTokenLifetime = 43200,
+
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                    RefreshTokenExpiration = TokenExpiration.Sliding
+                },
+
+                new Client
+                {
                     ClientName = "Web System",
                     Enabled = true,
                     ClientId = "web_system",

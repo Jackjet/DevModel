@@ -49,8 +49,8 @@ namespace IdentityServer3.Host.Config
                         DisplayName = "API access",
                         Type = ScopeType.Resource,
                         Emphasize = true,
-                        //Claims = "openid profile email role".Split(' ').Select(x=>new ScopeClaim(x,true)).ToList()
-                        Claims = "profile role resource".Split(' ').Select(x=>new ScopeClaim(x,true)).ToList()
+                        //Claims = "openid name family_name given_name email role".Split(' ').Select(x=>new ScopeClaim(x,true)).ToList(),
+                        IncludeAllClaimsForUser = true
                     },
 
                     new Scope

@@ -3,7 +3,6 @@ using Autofac.Features.ResolveAnything;
 using Autofac.Integration.WebApi;
 using AutoMapper;
 using Baibaomen.DevModel.ApiSite.AutoMapper;
-using Baibaomen.DevModel.Businsess;
 using Baibaomen.DevModel.Infrastructure;
 using IdentityServer3.AccessTokenValidation;
 using log4net;
@@ -17,6 +16,8 @@ using System.Configuration;
 using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net.Http.Formatting;
+using System.Security.Claims;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
@@ -31,13 +32,13 @@ namespace Baibaomen.DevModel.ApiSite
 
             ConfigureExceptionAndLog(app, config);
 
+            ConfigureSwagger(config);
+
             ConfigureWebApi(app, config);
 
             ConfigureJson(app, config);
 
-            //ConfigIdentityServer(app);
-
-            ConfigureSwagger(config);
+            ConfigIdentityServer(app);
 
             ConfigureAutoMapper();
 
@@ -73,7 +74,22 @@ namespace Baibaomen.DevModel.ApiSite
             {
                 c.SingleApiVersion("v1", "WebAPI");
                 c.IncludeXmlComments(GetXmlCommentsPath());
-            }).EnableSwaggerUi();
+
+                c.OAuth2("oauth2")
+                  .Description("api")
+                  .Flow("implicit")
+                  .AuthorizationUrl("https://localhost:44333/core/connect/authorize")
+                  .Scopes(scopes =>
+                  {
+                      scopes.Add("api","");
+                  });
+
+                //Apply oauth filter.
+                c.OperationFilter<OAuth2OperationFilter>();
+
+            }).EnableSwaggerUi(c =>
+                c.EnableOAuth2Support("api_doc", "238B3DFC-5AC1-42D7-A705-2B6A3356EFC9", "test_realm","Baibaomen Api")
+            );
 
         }
 
@@ -101,7 +117,7 @@ namespace Baibaomen.DevModel.ApiSite
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
                 Authority = authority,
-                RequiredScopes = new[] { "api" }
+                RequiredScopes = "api".Split(' ')
             });
 
             //// add app local claims per request

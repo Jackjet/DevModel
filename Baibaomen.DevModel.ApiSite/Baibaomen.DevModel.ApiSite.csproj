@@ -202,6 +202,7 @@
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="SwaggerOAuth2Filter.cs" />
     <Compile Include="ViewModels\CommunicationViewModels.cs" />
     <Compile Include="ViewModels\LoginViews.cs" />
     <Compile Include="ViewModels\PropertyViewModels.cs" />
