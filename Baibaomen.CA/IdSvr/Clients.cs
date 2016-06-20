@@ -27,6 +27,56 @@ namespace IdentityServer3.Host.Config
         {
             return new List<Client>
             {
+                
+                //Currently in production environment, use only the first two clients.
+                new Client
+                {
+                    ClientName = "Web User",
+                    ClientId = "web_user",
+                    Flow = Flows.ResourceOwner,
+
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("E066B041-5C34-47E5-9581-A16A27724D0C".Sha256())
+                    },
+                    AllowAccessToAllScopes = true,
+                    //AllowAccessToAllCustomGrantTypes = true,
+                    //AlwaysSendClientClaims = true,
+                    AccessTokenType = AccessTokenType.Jwt,
+                    AccessTokenLifetime = 3600 * 24,
+
+                    // refresh token settings
+                    AbsoluteRefreshTokenLifetime = 86400,
+                    SlidingRefreshTokenLifetime = 43200,
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                    RefreshTokenExpiration = TokenExpiration.Sliding
+                },
+
+                new Client
+                {
+                    ClientName = "Api document access",
+                    ClientId = "api_doc",
+                    Flow = Flows.Implicit,
+
+                    RedirectUris = new List<string>() { "http://localhost:9996","http://localhost:9996/swagger/ui/o2c-html"},
+
+                    PostLogoutRedirectUris = new List<string>() { "http://localhost:9996"},
+
+                    AllowedScopes = new List<string>() { "api"},
+                    RequireConsent = false,
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("238B3DFC-5AC1-42D7-A705-2B6A3356EFC9".Sha256())
+                    },
+
+                    AccessTokenType = AccessTokenType.Jwt,
+                    AccessTokenLifetime = 3600,
+                    AbsoluteRefreshTokenLifetime = 86400,
+                    SlidingRefreshTokenLifetime = 43200,
+
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                    RefreshTokenExpiration = TokenExpiration.Sliding
+                },
 
                 /////////////////////////////////////////////////////////////
                 // Console Client Credentials Sample

@@ -36,6 +36,7 @@ using Newtonsoft.Json;
 using Microsoft.Owin.Cors;
 using Swashbuckle.Application;
 using System.Collections.Generic;
+using System;
 
 namespace Baibaomen.CA
 {
@@ -129,7 +130,7 @@ namespace Baibaomen.CA
             app.Map("/core", core =>
             {
                 var idSvrFactory = Factory.Configure();
-                idSvrFactory.ConfigureUserService("AspId");
+                idSvrFactory.ConfigureUserService("CADB");
                 //idSvrFactory.ConfigureCustomUserService("AspId_CustomPK");
 
                 var options = new IdentityServerOptions

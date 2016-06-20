@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.CA", "Ba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.CA", "Baibaomen.CA\Baibaomen.CA.csproj", "{A0CD695A-B4CF-45CD-8913-EC00B6923C02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.ApiWeb", "Baibaomen.DevModel.ApiWeb\Baibaomen.DevModel.ApiWeb.csproj", "{5384E213-EEBD-4E80-85FE-75B11DEC4147}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{A0CD695A-B4CF-45CD-8913-EC00B6923C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0CD695A-B4CF-45CD-8913-EC00B6923C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0CD695A-B4CF-45CD-8913-EC00B6923C02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5384E213-EEBD-4E80-85FE-75B11DEC4147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5384E213-EEBD-4E80-85FE-75B11DEC4147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5384E213-EEBD-4E80-85FE-75B11DEC4147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5384E213-EEBD-4E80-85FE-75B11DEC4147}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +93,6 @@ Global
 		{78B8AE34-B988-4704-A4DA-F916B2A58992} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 		{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 		{A0CD695A-B4CF-45CD-8913-EC00B6923C02} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
+		{5384E213-EEBD-4E80-85FE-75B11DEC4147} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
 	EndGlobalSection
 EndGlobal
