@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
+using System.Threading;
 using System.Web.Http;
 
 namespace Baibaomen.DevModel.ApiWeb.Controllers
@@ -17,10 +18,18 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         /// <returns></returns>
         [Route("hello")]
         public IHttpActionResult GetHello() {
-            throw new ApplicationException("test error throw");
+
+            //ThreadPool.QueueUserWorkItem(delegate
+            //{
+
+            //    Thread.Sleep(5000);
+            //    throw new ApplicationException("Exception in new thread in controller.");
+            //});
+
+            //throw new ApplicationException("test error throw");
             return Ok("Hello Api!");
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -39,5 +48,6 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
 
             return Json(claims);
         }
+
     }
 }

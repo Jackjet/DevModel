@@ -42,7 +42,6 @@ namespace IdentityServer3.Host.Config
                     // resource scopes
                     ////////////////////////
                     
-                    
                     //currently only first two are used in production system.
                     new Scope
                     {

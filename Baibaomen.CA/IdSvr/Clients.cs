@@ -27,8 +27,6 @@ namespace IdentityServer3.Host.Config
         {
             return new List<Client>
             {
-                
-                //Currently in production environment, use only the first two clients.
                 new Client
                 {
                     ClientName = "Web User",

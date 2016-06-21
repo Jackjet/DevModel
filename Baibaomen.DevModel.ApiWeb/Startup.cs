@@ -5,6 +5,7 @@ using AutoMapper;
 using Baibaomen.DevModel.ApiWeb;
 using Baibaomen.DevModel.ApiWeb.AutoMapper;
 using Baibaomen.DevModel.Infrastructure;
+using IdentityServer3.AccessTokenValidation;
 using log4net;
 using Microsoft.Owin.Cors;
 using Newtonsoft.Json;
@@ -13,6 +14,8 @@ using Owin;
 using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web;
@@ -37,7 +40,32 @@ public class Startup
 
         ConfigureAutofac(app, config);
 
+        ConfigureIdentityServer(app);
+
         app.UseWebApi(config);
+    }
+
+    private void ConfigureIdentityServer(IAppBuilder app)
+    {
+        JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
+
+        string authority = ConfigurationManager.AppSettings["CA.Address"];
+
+        app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
+        {
+            Authority = authority,
+            RequiredScopes = "api".Split(' ')
+        });
+
+        //// add app local claims per request
+        //app.UseClaimsTransformation(incoming =>
+        //{
+        //    // either add claims to incoming, or create new principal
+        //    var appPrincipal = new ClaimsPrincipal(incoming);
+        //    incoming.Identities.First().AddClaim(new Claim("appSpecific", "some_value"));
+
+        //    return Task.FromResult(appPrincipal);
+        //});
     }
 
     private void ConfigureAutofac(IAppBuilder app, HttpConfiguration config)
