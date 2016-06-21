@@ -20,12 +20,23 @@ namespace Baibaomen.DevModel.Businsess
         /// Set the CreateTime and UpdateTime; Specify that the record needs concurrency check during update/delete.
         /// </summary>
         /// <param name="entity"></param>
-        public void PrepareEntityToSave(BaseEntity entity) {
+        public void PrepareEntityToSave(BaseEntity entity, int? operatorId = null) {
             if (entity.CreateTime == default(DateTime)) {
                 entity.CreateTime = DateTime.Now;
             }
 
             entity.UpdateTime = DateTime.Now;
+
+            if (operatorId != null) {
+                if (entity.Id == default(int))
+                {
+                    entity.CreatorId = operatorId;
+                }
+                else
+                {
+                    entity.UpdatorId = operatorId;
+                }
+            }
 
             if (Entry(entity).State != EntityState.Added)
             {

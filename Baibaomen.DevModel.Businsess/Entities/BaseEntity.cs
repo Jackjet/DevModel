@@ -25,6 +25,16 @@ namespace Baibaomen.DevModel.Businsess
         public DateTime UpdateTime { get; set; }
 
         /// <summary>
+        /// The user id of entity creator.
+        /// </summary>
+        public int? CreatorId { get; set; }
+
+        /// <summary>
+        /// The user id of last updator.
+        /// </summary>
+        public int? UpdatorId { get; set; }
+
+        /// <summary>
         /// Record version to do concurrency check.
         /// </summary>
         [Timestamp]

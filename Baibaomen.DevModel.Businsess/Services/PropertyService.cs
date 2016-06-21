@@ -42,9 +42,9 @@ namespace Baibaomen.DevModel.Businsess.Services
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public async Task AddAsync(Property item) {
+        public async Task AddAsync(Property item, int? operatorId = null) {
             db.Properties.Add(item);
-            db.PrepareEntityToSave(item);
+            db.PrepareEntityToSave(item, operatorId);
             await db.SaveChangesAsync();
         }
 
@@ -54,12 +54,12 @@ namespace Baibaomen.DevModel.Businsess.Services
         /// <param name="id"></param>
         /// <param name="updateAction"></param>
         /// <returns></returns>
-        public async Task<Property> UpdateAsync(int id,Func<Property,Property> updateAction) {
+        public async Task<Property> UpdateAsync(int id,Func<Property,Property> updateAction, int? operatorId = null) {
             var dbData = db.Properties.Find(id);
 
             updateAction(dbData);
 
-            db.PrepareEntityToSave(dbData);
+            db.PrepareEntityToSave(dbData, operatorId);
             await db.SaveChangesAsync();
 
             return dbData;

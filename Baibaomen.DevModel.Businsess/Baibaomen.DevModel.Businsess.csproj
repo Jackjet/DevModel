@@ -82,6 +82,10 @@
     <Compile Include="Migrations\201606171020327_Update1.Designer.cs">
       <DependentUpon>201606171020327_Update1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201606210334544_AddCreatorAndUpdatorToBaseEntity.cs" />
+    <Compile Include="Migrations\201606210334544_AddCreatorAndUpdatorToBaseEntity.Designer.cs">
+      <DependentUpon>201606210334544_AddCreatorAndUpdatorToBaseEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MongoDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201606171020327_Update1.resx">
       <DependentUpon>201606171020327_Update1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201606210334544_AddCreatorAndUpdatorToBaseEntity.resx">
+      <DependentUpon>201606210334544_AddCreatorAndUpdatorToBaseEntity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\ErrorMessageResource.resx">
       <Generator>ResXFileCodeGenerator</Generator>
