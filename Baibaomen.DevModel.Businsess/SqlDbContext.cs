@@ -13,7 +13,7 @@ namespace Baibaomen.DevModel.Businsess
             /// how to do explict load on nested element:
             /// context.Entry(post).Reference(p => p.Blog).Load(); 
             /// context.Entry(blog).Collection(p => p.Posts).Load(); 
-            Configuration.LazyLoadingEnabled = false;
+            //Configuration.LazyLoadingEnabled = false;
         }
 
         /// <summary>

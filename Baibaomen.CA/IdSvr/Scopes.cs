@@ -58,7 +58,8 @@ namespace IdentityServer3.Host.Config
                         Name = "file-service",
                         DisplayName = "File service access",
                         Type = ScopeType.Resource,
-                        Emphasize = true
+                        Emphasize = true,
+                        IncludeAllClaimsForUser = true
                     },
 
                     new Scope

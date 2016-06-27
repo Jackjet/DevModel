@@ -19,8 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.MVCClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.WebApiClientTest", "Baibaomen.DevModel.WebApiClientTest\Baibaomen.DevModel.WebApiClientTest.csproj", "{78B8AE34-B988-4704-A4DA-F916B2A58992}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.FrontendTest", "Baibaomen.DevModel.FrontendTest\Baibaomen.DevModel.FrontendTest.csproj", "{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{FFF346C8-D2E4-4847-82F2-C6E822FB01BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.CA", "Baibaomen.DevModel.CA\Baibaomen.DevModel.CA.csproj", "{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA}"
@@ -28,6 +26,38 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.CA", "Baibaomen.CA\Baibaomen.CA.csproj", "{A0CD695A-B4CF-45CD-8913-EC00B6923C02}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.DevModel.ApiWeb", "Baibaomen.DevModel.ApiWeb\Baibaomen.DevModel.ApiWeb.csproj", "{5384E213-EEBD-4E80-85FE-75B11DEC4147}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{580FF6B0-F860-473D-8378-8E19DDA811E1}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Baibaomen.DevModel.Website", "Baibaomen.DevModel.Website\", "{1F1EBE0A-D0D9-4F5B-A9F9-F17BABE9D2DB}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_4386"
+		Debug.AspNetCompiler.PhysicalPath = "Baibaomen.DevModel.Website\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4386\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_4386"
+		Release.AspNetCompiler.PhysicalPath = "Baibaomen.DevModel.Website\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_4386\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "4386"
+		SlnRelativePath = "Baibaomen.DevModel.Website\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{D833591D-CA2A-413D-B060-C5509DE4F9DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Baibaomen.FileService", "Baibaomen.FileServer\Baibaomen.FileService.csproj", "{FCEE9E75-F475-4784-BB1C-2881098D8DD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastruccture", "Infrastruccture", "{D7D4F250-7EFE-412F-B0CE-C5EF32448300}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{75C568C9-CF77-4BA9-B61A-E6B61682BB8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +93,6 @@ Global
 		{78B8AE34-B988-4704-A4DA-F916B2A58992}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78B8AE34-B988-4704-A4DA-F916B2A58992}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78B8AE34-B988-4704-A4DA-F916B2A58992}.Release|Any CPU.Build.0 = Release|Any CPU
-		{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{91EEC535-5FE7-4F1A-BF9C-F9203B3A3C90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -79,20 +105,28 @@ Global
 		{5384E213-EEBD-4E80-85FE-75B11DEC4147}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5384E213-EEBD-4E80-85FE-75B11DEC4147}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5384E213-EEBD-4E80-85FE-75B11DEC4147}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F1EBE0A-D0D9-4F5B-A9F9-F17BABE9D2DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F1EBE0A-D0D9-4F5B-A9F9-F17BABE9D2DB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCEE9E75-F475-4784-BB1C-2881098D8DD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCEE9E75-F475-4784-BB1C-2881098D8DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCEE9E75-F475-4784-BB1C-2881098D8DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCEE9E75-F475-4784-BB1C-2881098D8DD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0D6AC8C8-0AF3-4981-9E12-FF1085C1080E} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
-		{CCCDA1FB-F3A8-4B16-ABC8-C59A51EC7EBC} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
+		{0D6AC8C8-0AF3-4981-9E12-FF1085C1080E} = {75C568C9-CF77-4BA9-B61A-E6B61682BB8D}
+		{CCCDA1FB-F3A8-4B16-ABC8-C59A51EC7EBC} = {D7D4F250-7EFE-412F-B0CE-C5EF32448300}
 		{07605CEF-9BE4-4C50-832C-79991F4447AF} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
-		{B8F690DA-2D27-4668-958C-BE04761DB213} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
+		{B8F690DA-2D27-4668-958C-BE04761DB213} = {D7D4F250-7EFE-412F-B0CE-C5EF32448300}
 		{FE91F70F-366D-44EB-9338-42EC785E6057} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 		{4522F819-6D22-4B4F-96B0-235E98900A36} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 		{78B8AE34-B988-4704-A4DA-F916B2A58992} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 		{1D00AE4C-98A5-4E37-B5C0-E57F7B8A54FA} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 		{A0CD695A-B4CF-45CD-8913-EC00B6923C02} = {FFF346C8-D2E4-4847-82F2-C6E822FB01BB}
 		{5384E213-EEBD-4E80-85FE-75B11DEC4147} = {7B49BC8B-32B2-495A-848B-F8FA136BDE0B}
+		{1F1EBE0A-D0D9-4F5B-A9F9-F17BABE9D2DB} = {580FF6B0-F860-473D-8378-8E19DDA811E1}
+		{FCEE9E75-F475-4784-BB1C-2881098D8DD3} = {D833591D-CA2A-413D-B060-C5509DE4F9DD}
 	EndGlobalSection
 EndGlobal

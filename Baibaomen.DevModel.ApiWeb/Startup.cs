@@ -3,7 +3,7 @@ using Autofac.Features.ResolveAnything;
 using Autofac.Integration.WebApi;
 using AutoMapper;
 using Baibaomen.DevModel.ApiWeb;
-using Baibaomen.DevModel.ApiWeb.AutoMapper;
+using Baibaomen.DevModel.Business.AutoMapper;
 using Baibaomen.DevModel.Infrastructure;
 using IdentityServer3.AccessTokenValidation;
 using log4net;
@@ -22,8 +22,17 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
 
+/// <summary>
+/// 
+/// </summary>
 public class Startup
 {
+    string authority = ConfigurationManager.AppSettings["CA.Address"];
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="app"></param>
     public void Configuration(IAppBuilder app)
     {
         HttpConfiguration config = new HttpConfiguration();
@@ -35,10 +44,10 @@ public class Startup
         ConfigureJson(app, config);
 
         ConfigureWebApi(app, config);
-        
-        ConfigureAutoMapper();
 
         ConfigureAutofac(app, config);
+
+        ConfigureAutoMapper();
 
         ConfigureIdentityServer(app);
 
@@ -48,8 +57,6 @@ public class Startup
     private void ConfigureIdentityServer(IAppBuilder app)
     {
         JwtSecurityTokenHandler.InboundClaimTypeMap = new Dictionary<string, string>();
-
-        string authority = ConfigurationManager.AppSettings["CA.Address"];
 
         app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
         {
@@ -106,7 +113,7 @@ public class Startup
             c.OAuth2("oauth2")
               .Description("api")
               .Flow("implicit")
-              .AuthorizationUrl("https://localhost:44333/core/connect/authorize")
+              .AuthorizationUrl(authority + "connect/authorize")
               .Scopes(scopes =>
               {
                   scopes.Add("api", "");

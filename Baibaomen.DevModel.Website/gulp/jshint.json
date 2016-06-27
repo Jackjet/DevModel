@@ -1,0 +1,9 @@
+﻿{
+  "node": true,
+  "undef": true,
+  "unused": true,
+  "predef": [ "angular", "document", "window", "$", "jQuery", "google" ],
+  "strict": true,
+  "trailing": true,
+  "camelcase": true
+}

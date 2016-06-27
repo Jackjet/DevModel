@@ -9,7 +9,7 @@ namespace Baibaomen.CA.ViewModels
     /// <summary>
     /// login view.
     /// </summary>
-    public class LoginViewModel {
+    public class LoginView {
         /// <summary>
         /// user account.
         /// </summary>

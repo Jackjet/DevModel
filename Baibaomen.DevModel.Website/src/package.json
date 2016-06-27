@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "name": "ASP.NET",
+  "private": true,
+  "devDependencies": {
+    "angular": "*",
+    "angular-animate": "^1.5.7",
+    "angular-cookies": "^1.5.7",
+    "angular-moment": "^1.0.0-beta.6",
+    "angular-sanitize": "^1.5.7",
+    "angular-ui-router": "^0.3.1",
+    "angular-ui-select": "^0.12.100",
+    "json-formatter": "^0.1.0"
+  }
+}

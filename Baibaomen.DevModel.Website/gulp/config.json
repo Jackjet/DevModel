@@ -1,0 +1,16 @@
+﻿{
+  "path": {
+    "src": "./src",
+    "indexPage": "index.html",
+    "dest": "./dest",
+    "destApp": "./dest/app",
+    "app": "./src/app",
+    "appBundle": "app.js",
+    "js": "./src/js",
+    "jsBundle": "app-js.js",
+    "lib": "./src/lib",
+    "css": "./src/styles/css",
+    "cssBundle": "app.css",
+    "destCss": "./dest/styles/css"
+  }
+}

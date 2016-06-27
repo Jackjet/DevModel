@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Baibaomen.DevModel.ApiWeb.Models;
+using Baibaomen.DevModel.Businsess.DomainServices;
 using Baibaomen.DevModel.Businsess.Entities;
-using Baibaomen.DevModel.Businsess.Services;
 using Baibaomen.DevModel.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -37,17 +37,14 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         /// <returns></returns>
         [Route("")]
         [ResponseType(typeof(PropertyViewModel))]
-        public async Task<IHttpActionResult> Post(PropertyCreateModel model) {
+        public async Task<IHttpActionResult> Post(PropertyAndCommunicationCreateModel model) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            var property = Mapper.Map<Property>(model);
-            await _propertyService.AddAsync(property);
+            var toReturn = await _propertyService.AddPropertyAsync(model);
 
-            var toReturn = Mapper.Map<PropertyViewModel>(property);
-
-            return CreatedAtRoute("property", new { id = property.Id }, toReturn);
+            return CreatedAtRoute("property", new { id = toReturn.Id }, toReturn);
         }
 
         /// <summary>
@@ -62,10 +59,8 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-
-            var theProp = await _propertyService.UpdateAsync(id, x => Mapper.Map(model, x));
-
-            return Ok(Mapper.Map<PropertyViewModel>(theProp));
+            
+            return Ok(await _propertyService.UpdatePropertyAsync(id,model));
         }
 
         /// <summary>
@@ -76,7 +71,7 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         [Route("")]
         [ResponseType(typeof(PagedResult<PropertyViewModel>))]
         public IHttpActionResult GetAll(ODataQueryOptions<Property> options) {
-            var result = _propertyService.GetAll();
+            var result = _propertyService.GetAllProperties();
 
             return Ok(options.FilterResult<PropertyViewModel, Property>(result, this));
         }
@@ -91,7 +86,7 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         [ResponseType(typeof(PropertyViewModel))]
         public IHttpActionResult Get(int id, ODataQueryOptions<PropertyViewModel> options)
         {
-            var theProperty = _propertyService.Get(id);
+            var theProperty = _propertyService.GetProperty(id);
 
             if (theProperty == null)
             {
@@ -103,5 +98,22 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
             return Json(options.ApplyTo(toReturn, new ODataQuerySettings()));
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Route("{id}")]
+        public async Task<IHttpActionResult> Delete(int id)
+        {
+            var theProperty = _propertyService.GetProperty(id);
+            if (theProperty == null)
+            {
+                return NotFound();
+            }
+
+            await _propertyService.DeleteAsync(theProperty);
+            return Ok();
+        }
     }
 }

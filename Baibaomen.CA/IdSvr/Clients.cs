@@ -76,6 +76,32 @@ namespace IdentityServer3.Host.Config
                     RefreshTokenExpiration = TokenExpiration.Sliding
                 },
 
+                new Client
+                {
+                    ClientName = "File service document access",
+                    ClientId = "file_service_doc",
+                    Flow = Flows.Implicit,
+
+                    RedirectUris = new List<string>() { "http://localhost:26268", "http://localhost:26268/swagger/ui/o2c-html"},
+
+                    PostLogoutRedirectUris = new List<string>() { "http://localhost:26268"},
+
+                    AllowedScopes = new List<string>() { "file-service"},
+                    RequireConsent = false,
+                    ClientSecrets = new List<Secret>
+                    {
+                        new Secret("8D539EC6-7E6B-41F5-BD4D-95CF50511796".Sha256())
+                    },
+
+                    AccessTokenType = AccessTokenType.Jwt,
+                    AccessTokenLifetime = 3600,
+                    AbsoluteRefreshTokenLifetime = 86400,
+                    SlidingRefreshTokenLifetime = 43200,
+
+                    RefreshTokenUsage = TokenUsage.OneTimeOnly,
+                    RefreshTokenExpiration = TokenExpiration.Sliding
+                },
+
                 /////////////////////////////////////////////////////////////
                 // Console Client Credentials Sample
                 /////////////////////////////////////////////////////////////
