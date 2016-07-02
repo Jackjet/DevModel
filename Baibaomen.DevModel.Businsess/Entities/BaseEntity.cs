@@ -10,9 +10,9 @@ namespace Baibaomen.DevModel.Businsess
     /// <summary>
     /// Provide base class for database entities.
     /// </summary>
-    public abstract class BaseEntity
+    public abstract class BaseEntity<TId,TUserId>
     {
-        public int Id { get; set; }
+        public TId Id { get; set; }
 
         /// <summary>
         /// The time the record created. Should be maintained by related services.
@@ -27,12 +27,12 @@ namespace Baibaomen.DevModel.Businsess
         /// <summary>
         /// The user id of entity creator.
         /// </summary>
-        public int? CreatorId { get; set; }
+        public TUserId CreatorId { get; set; }
 
         /// <summary>
         /// The user id of last updator.
         /// </summary>
-        public int? UpdatorId { get; set; }
+        public TUserId UpdatorId { get; set; }
 
         /// <summary>
         /// Record version to do concurrency check.

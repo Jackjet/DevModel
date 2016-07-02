@@ -21,6 +21,7 @@ namespace Baibaomen.DevModel.Business.AutoMapper
             CreateMap<Property, PropertyViewModel>();
             CreateMap<PropertyCreateModel, Property>();
             CreateMap<PropertyUpdateModel, Property>();
+            CreateMap<PropertyDeleteModel, Property>();
             CreateMap<PropertyAndCommunicationCreateModel, Property>();
 
             CreateMap<Communication, CommunicationViewModel>();

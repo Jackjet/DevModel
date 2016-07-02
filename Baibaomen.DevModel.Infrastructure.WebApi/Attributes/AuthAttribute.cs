@@ -1,27 +1,31 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using System.Web.Http;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Controllers;
 
-//namespace Baibaomen.DevModel.Infrastructure.WebApi.Attributes
-//{
-//    public class AuthAttribute : AuthorizeAttribute
-//    {
-//        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
-//        {
-//            if (filterContext.HttpContext.User.Identity.IsAuthenticated)
-//            {
-//                // 403 we know who you are, but you haven't been granted access
-//                filterContext.Result = new HttpStatusCodeResult(System.Net.HttpStatusCode.Forbidden);
-//            }
-
-//            else
-//            {
-//                // 401 who are you? go login and then try again
-//                filterContext.Result = new HttpUnauthorizedResult();
-//            }
-//        }
-//    }
-//}
+namespace Baibaomen.DevModel.Infrastructure
+{
+    /// <summary>
+    /// Replacement of AuthorizeAttribute. Can differ 401 and 403 based on ClaimsPrincipal.
+    /// </summary>
+    public class AuthAttribute : AuthorizeAttribute
+    {
+        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
+        {
+            var principal = actionContext.RequestContext.Principal as ClaimsPrincipal;
+            if (principal.Identity.IsAuthenticated)
+            {
+                actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Forbidden);
+            }
+            else
+            {
+                actionContext.Response = new HttpResponseMessage(System.Net.HttpStatusCode.Unauthorized);
+            }
+        }
+    }
+}

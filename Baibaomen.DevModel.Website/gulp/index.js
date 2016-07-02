@@ -26,7 +26,7 @@ gulp.task('clean-dest-dir', function () {
 
 gulp.task('inject-appjs-dev', function () {
     var target = gulp.src(config.path.src + '/' + config.path.indexPage);
-    var sources = gulp.src([config.path.app + '/**/*.js']);
+    var sources = gulp.src([config.path.app + '/**/*.js']).pipe(sort(function (i, j) { return i.path == j.path ? 0 : i.path > j.path ? 1 : -1; }));
 
     return target.pipe(inject(sources, { relative: true, starttag: '<!-- inject:app:{{ext}} -->' }))
         .pipe(gulp.dest(config.path.src));
@@ -34,7 +34,7 @@ gulp.task('inject-appjs-dev', function () {
 
 gulp.task('inject-js-dev', function () {
     var target = gulp.src(config.path.src + '/' + config.path.indexPage);
-    var sources = gulp.src([config.path.js + '/**/*.js']);
+    var sources = gulp.src([config.path.js + '/**/*.js']).pipe(sort(function (i, j) { return i.path == j.path ? 0 : i.path > j.path ? 1 : -1; }));
 
     return target.pipe(inject(sources, { relative: true, starttag: '<!-- inject:js:{{ext}} -->' }))
         .pipe(gulp.dest(config.path.src));
@@ -59,6 +59,9 @@ gulp.task('minify-css', function () {
       .pipe(gulp.dest(config.path.destCss));
 });
 
+gulp.task('_prepare-dev', function () {
+    return runSequence('inject-css-dev', 'inject-js-dev', 'inject-appjs-dev');
+});
 //gulp.task('release-staging', function () {
 //    return runSequence('clean-dest-dir', 'minify-html', 'minify-scripts-app', 'minify-scripts-js', 'minify-css', 'replace-staging');
 //});

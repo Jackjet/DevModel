@@ -46,6 +46,15 @@ namespace Baibaomen.DevModel.ApiWeb.Models
         public byte[] RecordVersion { get; set; }
     }
 
+    public class PropertyDeleteModel
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        [Required]
+        public byte[] RecordVersion { get; set; }
+    }
+
     /// <summary>
     /// /
     /// </summary>

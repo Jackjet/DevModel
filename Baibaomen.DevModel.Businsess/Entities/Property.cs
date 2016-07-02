@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Baibaomen.DevModel.Businsess.Entities
 {
-    public class Property:BaseEntity
+    public class Property:BaseEntity<int,string>
     {
         public string Name { get; set; }
 

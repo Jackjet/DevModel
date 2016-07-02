@@ -3,11 +3,6 @@ using Baibaomen.DevModel.ApiWeb.Models;
 using Baibaomen.DevModel.Businsess.DomainServices;
 using Baibaomen.DevModel.Businsess.Entities;
 using Baibaomen.DevModel.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -38,10 +33,6 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         [Route("")]
         [ResponseType(typeof(PropertyViewModel))]
         public async Task<IHttpActionResult> Post(PropertyAndCommunicationCreateModel model) {
-            if (!ModelState.IsValid) {
-                return BadRequest(ModelState);
-            }
-
             var toReturn = await _propertyService.AddPropertyAsync(model);
 
             return CreatedAtRoute("property", new { id = toReturn.Id }, toReturn);
@@ -56,10 +47,6 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         [Route("{id}")]
         [ResponseType(typeof(PropertyViewModel))]
         public async Task<IHttpActionResult> Put(int id,PropertyUpdateModel model) {
-            if (!ModelState.IsValid) {
-                return BadRequest(ModelState);
-            }
-            
             return Ok(await _propertyService.UpdatePropertyAsync(id,model));
         }
 
@@ -104,7 +91,7 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Route("{id}")]
-        public async Task<IHttpActionResult> Delete(int id)
+        public async Task<IHttpActionResult> Delete(int id, PropertyDeleteModel model)
         {
             var theProperty = _propertyService.GetProperty(id);
             if (theProperty == null)

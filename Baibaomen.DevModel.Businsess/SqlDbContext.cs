@@ -20,15 +20,15 @@ namespace Baibaomen.DevModel.Businsess
         /// Set the CreateTime and UpdateTime; Specify that the record needs concurrency check during update/delete.
         /// </summary>
         /// <param name="entity"></param>
-        public void PrepareEntityToSave(BaseEntity entity, int? operatorId = null) {
-            if (entity.CreateTime == default(DateTime)) {
+        public void PrepareEntityToSave<TId,TUserId>(BaseEntity<TId,TUserId> entity,bool needConcurrencyCheck = true, TUserId operatorId = default(TUserId)){
+            if (entity.CreateTime == default(DateTime))  {
                 entity.CreateTime = DateTime.Now;
             }
 
             entity.UpdateTime = DateTime.Now;
 
             if (operatorId != null) {
-                if (entity.Id == default(int))
+                if (entity.Id.Equals(default(TId)))
                 {
                     entity.CreatorId = operatorId;
                 }
@@ -38,7 +38,22 @@ namespace Baibaomen.DevModel.Businsess
                 }
             }
 
-            if (Entry(entity).State != EntityState.Added)
+            if (needConcurrencyCheck && Entry(entity).State != EntityState.Added)
+            {
+                Entry(entity).OriginalValues["RecordVersion"] = entity.RecordVersion;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TId"></typeparam>
+        /// <typeparam name="TUserId"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="operatorId"></param>
+        public void PrepareEntityToDelete<TId, TUserId>(BaseEntity<TId, TUserId> entity, bool needConcurrencyCheck = true, TUserId operatorId = default(TUserId))
+        {
+            if (needConcurrencyCheck && Entry(entity).State != EntityState.Added)
             {
                 Entry(entity).OriginalValues["RecordVersion"] = entity.RecordVersion;
             }

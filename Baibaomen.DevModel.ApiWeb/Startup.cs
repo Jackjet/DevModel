@@ -137,6 +137,8 @@ public class Startup
     {
         config.MapHttpAttributeRoutes();
 
+        config.AddModelValidationFilter();
+
         app.UseCors(CorsOptions.AllowAll);
 
         config.EnableETag(new List<string>() { "/api/" }, ExecutionMode.Include);

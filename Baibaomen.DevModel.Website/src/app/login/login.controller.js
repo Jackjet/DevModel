@@ -1,12 +1,11 @@
-﻿
-(function () {
+﻿(function () {
     'use strict';
 
     angular
       .module('devModel')
-      .controller('propertyCtrl', ['$scope', propertyCtrl]);
+      .controller('loginCtrl', ['$scope', loginCtrl]);
 
-    function propertyCtrl($scope) {
+    function loginCtrl($scope) {
         var vm = this;
 
         vm.title = '';

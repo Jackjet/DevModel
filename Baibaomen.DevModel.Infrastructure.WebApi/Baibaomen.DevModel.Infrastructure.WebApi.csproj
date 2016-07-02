@@ -99,14 +99,15 @@
   <ItemGroup>
     <Compile Include="ActionResults\SimpleConflictResult.cs" />
     <Compile Include="Attributes\AuthAttribute.cs" />
+    <Compile Include="ClaimsExtention\ClaimsExtentionForApiController.cs" />
     <Compile Include="Handlers\HttpExceptionLogger.cs" />
     <Compile Include="Handlers\UnhandledExceptionHandler.cs" />
     <Compile Include="ActionResults\SimpleInternalServerErrorResult.cs" />
     <Compile Include="Handlers\WebApiETagExtention.cs" />
+    <Compile Include="Attributes\ModelValidationAttribute.cs" />
     <Compile Include="OData\ODataQueryFilterExtention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Swagger\SwaggerOAuth2Filter.cs" />
-    <Compile Include="Utility\ModelStateErrorBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
