@@ -1,0 +1,3 @@
+﻿function sayHi() {
+    return 'hi';
+}
