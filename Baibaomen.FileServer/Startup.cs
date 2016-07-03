@@ -106,18 +106,7 @@ public class Startup
     private void ConfigureExceptionAndLog(IAppBuilder app, HttpConfiguration config)
     {
         ILog logger = LogManager.GetLogger("logger");
-        config.Services.Add(typeof(IExceptionLogger), new HttpExceptionLogger(e =>
-        {
-            var headers = new List<string>();
-            for (int i = 0; i < HttpContext.Current.Request.Headers.Count; i++)
-            {
-                headers.Add(HttpContext.Current.Request.Headers.AllKeys[i] + ":" + HttpContext.Current.Request.Headers[i]);
-            }
 
-            logger.Error("Unhandled exception occurred\nURL:\n" + HttpContext.Current.Request.Url + "\nHeaders:\n" + string.Join("\n", headers), e);
-        }
-        ));
-
-        config.Services.Replace(typeof(IExceptionHandler), new UnhandledExceptionHandler());
+        config.Services.Replace(typeof(IExceptionHandler), new UnhandledExceptionHandler(x => logger.Error($"Unhandled exception occurred\nURL:\n{x.Request.RequestUri}\nHeaders:\n{x.Request.Headers}", x.Exception)));
     }
 }

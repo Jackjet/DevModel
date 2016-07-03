@@ -31,7 +31,7 @@ namespace Baibaomen.DevModel.Businsess.DomainServices
         /// <param name="model"></param>
         /// <param name="operatorId"></param>
         /// <returns></returns>
-        public async Task<PropertyViewModel> AddPropertyAsync(PropertyAndCommunicationCreateModel model, int? operatorId = null)
+        public async Task<PropertyViewModel> AddPropertyAsync(PropertyAndCommunicationCreateModel model,User theOperator)
         {
             var property = Mapper.Map<Property>(model);
 
@@ -39,22 +39,22 @@ namespace Baibaomen.DevModel.Businsess.DomainServices
             {
                 await _propertyDataService.AddAsync(property);
                 var communication = new Communication() { Property = property, PropertyId = property.Id, Content = model.FirstCommunication };
-                await _communicationDataService.AddAsync(communication, operatorId);
+                await _communicationDataService.AddAsync(communication,true,theOperator);
                 t.Commit();
             }
 
-            if (property.CreatorId != null) {
-                await _snsService.EmailNotifyAsync(property.CreatorId.GetValueOrDefault(), Resources.Property.EmailSubjectForCreation.FormatMe(property.Name), 
-                    Resources.Property.EmailContentForCreation.FormatMe(property.CreatorId.GetValueOrDefault(),property.Name,property.CreateTime));
+            if (property.CreatorId != default(int)) {
+                await _snsService.EmailNotifyAsync(property.CreatorId, Resources.Property.EmailSubjectForCreation.FormatMe(property.Name), 
+                    Resources.Property.EmailContentForCreation.FormatMe(property.CreatorId,property.Name,property.CreateTime));
             }
 
             var toReturn = Mapper.Map<PropertyViewModel>(property);
             return toReturn;
         }
 
-        public async Task<PropertyViewModel> UpdatePropertyAsync(int id, PropertyUpdateModel model, int? operatorId = null)
+        public async Task<PropertyViewModel> UpdatePropertyAsync(int id, PropertyUpdateModel model, User theOperator)
         {
-            var property = await _propertyDataService.UpdateAsync(id, x => Mapper.Map(model, x),operatorId);
+            var property = await _propertyDataService.UpdateAsync(id, x => Mapper.Map(model, x),true,theOperator);
             var toReturn = Mapper.Map<PropertyViewModel>(property);
             return toReturn;
         }
@@ -63,13 +63,13 @@ namespace Baibaomen.DevModel.Businsess.DomainServices
         /// 
         /// </summary>
         /// <returns></returns>
-        public IQueryable<Property> GetAllProperties() {
+        public IQueryable<Property> GetAllProperties(User theOperator = null) {
             return _propertyDataService.GetAll();
         }
 
-        public Property GetProperty(int id)
+        public Property GetProperty(int id, User theOperator = null)
         {
-            return _propertyDataService.Get(id);
+            return _propertyDataService.Get(id,theOperator);
         }
         
         /// <summary>
@@ -77,18 +77,19 @@ namespace Baibaomen.DevModel.Businsess.DomainServices
         /// </summary>
         /// <param name="communication"></param>
         /// <returns></returns>
-        public virtual async Task DeleteAsync(Property item)
+        public virtual async Task DeleteAsync<TRecordVersion>(int itemId,TRecordVersion clientRecordVersion = default(TRecordVersion), User theOperator = null)
         {
+            var item = _propertyDataService.Get(itemId);
             using (var t = _propertyDataService.BeginTransaction())
             {
                 if (item.Communications != null)
                 {
-                    foreach (var communication in item.Communications)
+                    foreach (var communication in item.Communications.ToArray())
                     {
                         await _communicationDataService.DeleteAsync(communication);
                     }
                 }
-                await _propertyDataService.DeleteAsync(item);
+                await _propertyDataService.DeleteAsync(item,clientRecordVersion,theOperator);
                 //throw new ApplicationException("error on purpose");
                 t.Commit();
             }

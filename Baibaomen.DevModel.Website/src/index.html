@@ -4,9 +4,9 @@
     <title></title>
 	<meta charset="utf-8" />
     <!--css libs-->
-    <link href="lib/node_modules/jquery-ui/themes/base/minified/jquery-ui.min.css" rel="stylesheet" />
+    <link href="lib/jquery-ui/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
     <link href="lib/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="lib/node_modules/json-formatter/css/style.css" rel="stylesheet" />
+    <link href="lib/json-formatter/dist/json-formatter.css" rel="stylesheet" />
     <!--end css libs-->
 
     <!--inject:css-->
@@ -15,18 +15,21 @@
     <!--endinject-->
 </head>
 <body>
+    <div ng-include="'app/property/property-list.html'"></div>
     <!--js libs-->
-    <script src="lib/node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="lib/node_modules/jquery-ui/jquery-ui.js"></script>
+    <script src="lib/node_modules/jquery/dist/jquery.js"></script>
+    <script src="lib/jquery-ui/jquery-ui.js"></script>
     <script src="lib/node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script src="lib/linq.js/linq.js"></script>
-    <script src="lib/node_modules/angular/angular.min.js"></script>
-    <script src="lib/node_modules/angular-animate/angular-animate.min.js"></script>
-    <script src="lib/node_modules/angular-cookies/angular-cookies.min.js"></script>
-    <script src="lib/node_modules/angular-moment/angular-moment.min.js"></script>
-    <script src="lib/node_modules/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="lib/node_modules/angular/angular.js"></script>
+    <script src="lib/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="lib/node_modules/angular-cookies/angular-cookies.js"></script>
+    <script src="lib/node_modules/angular-moment/node_modules/moment/moment.js"></script>
+    <script src="lib/node_modules/angular-moment/angular-moment.js"></script>
+    <script src="lib/node_modules/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="lib/node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script src="lib/node_modules/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="lib/node_modules/json-formatter/src/jsonFormatter.js"></script>
+    <script src="lib/json-formatter/dist/json-formatter.js"></script>
     <!--end js libs-->
 
     <!--inject:js:js-->
@@ -34,9 +37,14 @@
     <!--endinject-->
 
     <!--inject:app:js-->
-    <script src="app/app.js"></script>
-    <script src="app/constants.js"></script>
+    <script src="app/__0constants.js"></script>
+    <script src="app/__app.js"></script>
+    <script src="app/_business/dev-model.service.js"></script>
+    <script src="app/_infrastructure/http-service.js"></script>
+    <script src="app/_infrastructure/rest-service.js"></script>
+    <script src="app/login/login.controller.js"></script>
     <script src="app/property/property.controller.js"></script>
+    <script src="app/property/property.service.js"></script>
     <!--endinject-->
 </body>
 </html>

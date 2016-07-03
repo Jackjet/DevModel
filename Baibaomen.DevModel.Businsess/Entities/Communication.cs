@@ -12,9 +12,6 @@ namespace Baibaomen.DevModel.Businsess.Entities
     {
         [Required]
         public string Content { get; set; }
-
-        [Required]
-        public int Creator { get; set; }
         
         public int PropertyId { get; set; }
 

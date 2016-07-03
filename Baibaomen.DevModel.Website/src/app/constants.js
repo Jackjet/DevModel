@@ -1,1 +1,0 @@
-﻿window.location.href = 'http://www.baidu.com';

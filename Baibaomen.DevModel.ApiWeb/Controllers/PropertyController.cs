@@ -3,6 +3,7 @@ using Baibaomen.DevModel.ApiWeb.Models;
 using Baibaomen.DevModel.Businsess.DomainServices;
 using Baibaomen.DevModel.Businsess.Entities;
 using Baibaomen.DevModel.Infrastructure;
+using System;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -17,12 +18,16 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
     public class PropertyController : ApiController
     {
         PropertyService _propertyService;
+        UserService _userService;
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="propertyService"></param>
-        public PropertyController(PropertyService propertyService) {
+        /// <param name="userService"></param>
+        public PropertyController(PropertyService propertyService,UserService userService) {
             _propertyService = propertyService;
+            _userService = userService;
         }
 
         /// <summary>
@@ -33,8 +38,7 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         [Route("")]
         [ResponseType(typeof(PropertyViewModel))]
         public async Task<IHttpActionResult> Post(PropertyAndCommunicationCreateModel model) {
-            var toReturn = await _propertyService.AddPropertyAsync(model);
-
+            var toReturn = await _propertyService.AddPropertyAsync(model,this.GetOperator(_userService));
             return CreatedAtRoute("property", new { id = toReturn.Id }, toReturn);
         }
 
@@ -47,7 +51,7 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         [Route("{id}")]
         [ResponseType(typeof(PropertyViewModel))]
         public async Task<IHttpActionResult> Put(int id,PropertyUpdateModel model) {
-            return Ok(await _propertyService.UpdatePropertyAsync(id,model));
+            return Ok(await _propertyService.UpdatePropertyAsync(id,model,this.GetOperator(_userService)));
         }
 
         /// <summary>
@@ -58,8 +62,7 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         [Route("")]
         [ResponseType(typeof(PagedResult<PropertyViewModel>))]
         public IHttpActionResult GetAll(ODataQueryOptions<Property> options) {
-            var result = _propertyService.GetAllProperties();
-
+            var result = _propertyService.GetAllProperties(this.GetOperator(_userService));
             return Ok(options.FilterResult<PropertyViewModel, Property>(result, this));
         }
 
@@ -73,33 +76,26 @@ namespace Baibaomen.DevModel.ApiWeb.Controllers
         [ResponseType(typeof(PropertyViewModel))]
         public IHttpActionResult Get(int id, ODataQueryOptions<PropertyViewModel> options)
         {
-            var theProperty = _propertyService.GetProperty(id);
+            var theProperty = _propertyService.GetProperty(id, this.GetOperator(_userService));
 
             if (theProperty == null)
             {
                 return NotFound();
             }
 
-            var toReturn = Mapper.Map<PropertyViewModel>(theProperty);
-
-            return Json(options.ApplyTo(toReturn, new ODataQuerySettings()));
+            return Ok(options.FilterSingleResult(theProperty, this));
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="recordVersion"></param>
         /// <returns></returns>
         [Route("{id}")]
-        public async Task<IHttpActionResult> Delete(int id, PropertyDeleteModel model)
+        public async Task<IHttpActionResult> Delete(int id, string recordVersion)
         {
-            var theProperty = _propertyService.GetProperty(id);
-            if (theProperty == null)
-            {
-                return NotFound();
-            }
-
-            await _propertyService.DeleteAsync(theProperty);
+            await _propertyService.DeleteAsync(id, Convert.FromBase64String(recordVersion), this.GetOperator(_userService));
             return Ok();
         }
     }

@@ -4,15 +4,21 @@
 
     angular
       .module('devModel')
-      .controller('propertyCtrl', ['$scope', propertyCtrl]);
+      .controller('propertyCtrl', ['propertyService', propertyCtrl]);
 
-    function propertyCtrl($scope) {
+    function propertyCtrl(propertyService) {
         var vm = this;
 
         vm.title = '';
 
         activate();
 
-        function activate() { }
+        function activate() {
+            propertyService.get(2).then(function (data) {
+                vm.properties = data;
+
+                propertyService.del(2, data.recordVersion);
+            });
+        }
     }
 })();

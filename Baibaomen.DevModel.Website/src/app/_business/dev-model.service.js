@@ -1,9 +1,14 @@
-﻿(function () {
+﻿/// <reference path="../__0constants.js" />
+
+(function () {
     'use strict';
 
-    angular.module('devModel').factory('devModelApi', ['$http', '$q', '$location', '$timeout', '$cache', devModelApi]);
+    angular.module('devModel').factory('devModelApi', ['http','rest', devModelApi]);
 
-    function devModelApi() {
+    function devModelApi(http, rest) {
+
+        var theRest = rest('property');
+
         var service = {
             getProperties: getProperties,
             getProperty: getProperty,
@@ -14,10 +19,11 @@
         return service;
 
         function getProperties() {
+            return http.get('property');
         }
 
         function getProperty(propertyId) {
-
+            return http.get('property')
         }
 
         function saveProperty(property) {
@@ -27,57 +33,5 @@
 
         }
 
-        function httpExecute(requestUrl, method, data) {
-
-            if (consts.isMocking) {
-                var deferred = $q.defer();
-                $timeout(function () {
-                    deferred.resolve(mock[method + ':' + requestUrl]);
-                }, 0);
-                return deferred.promise;
-            }
-
-            return $http({
-                url: consts.baseUrl + requestUrl,
-                method: method,
-                //data: data,
-                //headers: requestConfig.headers
-                data: data
-            }).then(function (response) {
-                //set mock.
-                //mock[method + ':' + requestUrl] = response.data;
-                console.log('**response from EXECUTE ' + method + ' ' + requestUrl, response);
-
-                return response.data;
-
-            }, function (err) {
-                console.log('err when ' + method + ' ' + requestUrl, err);
-                return $q.reject(err);
-            });
-        }
-
-        function httpGet(url) {
-            return httpExecute(url, 'GET');
-        }
-
-        function httpPatch(url, data) {
-            return httpExecute(url, 'PUT', data);
-        }
-
-        function httpPost(url, data) {
-            return httpExecute(url, 'POST', data);
-        }
-
-        function httpDelete(url) {
-            return httpExecute(url, 'DELETE');
-        }
-
-        function saveItem(url, item) {
-            if (item.id) {
-                return httpPatch(url + '/' + item.id, item);
-            } else {
-                return httpPost(url, item);
-            }
-        }
     }
 })();

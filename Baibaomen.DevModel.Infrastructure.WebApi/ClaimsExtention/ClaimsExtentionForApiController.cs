@@ -21,13 +21,15 @@ namespace Baibaomen.DevModel.Infrastructure
         public static ClaimsPrincipal GetClaimsPrincipal(this ApiController me) {
             return me.RequestContext.Principal as ClaimsPrincipal;
         }
-
+        
         /// <summary>
-        /// returns null if no user principal found.
+        /// Gets the user id from claim 'sub'. Returns null if no sub claim found.
         /// </summary>
         /// <param name="me"></param>
         /// <returns></returns>
-        public static string GetUserId(this ClaimsPrincipal me) {
+        public static string GetClaimIdentity(this ClaimsPrincipal me) {
+            var sub = me.FindFirst("sub");
+            return sub == null ? null : sub.Value;
         }
     }
 }

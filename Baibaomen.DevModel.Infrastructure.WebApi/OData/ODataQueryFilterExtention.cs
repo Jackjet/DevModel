@@ -41,6 +41,16 @@ namespace Baibaomen.DevModel.Infrastructure
             return pagedResult;
         }
 
+        public static TViewModel FilterSingleResult<TViewModel, TSource>(this ODataQueryOptions<TViewModel> options, TSource source, ApiController controller, ODataValidationSettings settings = null)
+        {
+            if (settings != null)
+            {
+                options.Validate(settings);
+            }
+            var mapped = Mapper.Map<TViewModel>(source);
+           return options.ApplyToWithExpandAndSelectSupport(mapped);
+        }
+
         /// <summary>
         /// Apply filter. Handle $select and $expand gracefully.($select tested. $expand not tested yet.)
         /// </summary>
@@ -67,6 +77,27 @@ namespace Baibaomen.DevModel.Infrastructure
             }
 
             return raw;
+        }
+
+        /// <summary>
+        /// Apply filter. Handle $select and $expand gracefully.($select tested. $expand not tested yet.)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="options"></param>
+        /// <param name="communications"></param>
+        /// <returns></returns>
+        public static dynamic ApplyToWithExpandAndSelectSupport<T>(this ODataQueryOptions<T> options, T entity)
+        {
+            var filtered = options.ApplyTo(entity,new ODataQuerySettings());
+
+            if (options.SelectExpand != null)
+            {
+                return JsonConvert.DeserializeObject<T>(JsonConvert.SerializeObject(filtered));
+            }
+            else
+            {
+                return entity;
+            }
         }
     }
 }
