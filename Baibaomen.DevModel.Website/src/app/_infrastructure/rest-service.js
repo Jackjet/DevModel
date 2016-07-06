@@ -23,7 +23,7 @@
         return service;
 
         function get(/*optional*/ id) {
-            return http.get(_itemUrl + (id ? ('/' + id) : ''));
+            return http.get(_itemUrl + (id ? ('/' + id) : '?$count=true'));
         }
 
         function post(id, item) {

@@ -14,10 +14,8 @@
         activate();
 
         function activate() {
-            propertyService.get(2).then(function (data) {
+            propertyService.get().then(function (data) {
                 vm.properties = data;
-
-                propertyService.del(2, data.recordVersion);
             });
         }
     }
