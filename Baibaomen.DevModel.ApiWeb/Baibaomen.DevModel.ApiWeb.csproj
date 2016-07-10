@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autofac\AutofacModule.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
