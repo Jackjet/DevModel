@@ -24,7 +24,7 @@ namespace Baibaomen.DevModel.Businsess.DomainServices
         /// </summary>
         /// <param name="me"></param>
         /// <returns></returns>
-        public static User GetOperator(this ApiController me, UserService userDataService)
+        public static async Task<User> GetOperatorAsync(this ApiController me, UserService userDataService)
         {
             var user = me.User as ClaimsPrincipal;
             if (user == null)
@@ -38,8 +38,8 @@ namespace Baibaomen.DevModel.Businsess.DomainServices
             {
                 return null;
             }
-
-            return userDataService.GetUserByClaimIdentityAsync(key).ConfigureAwait(false).GetAwaiter().GetResult();
+            return await userDataService.GetUserByClaimIdentityAsync(key);
+            //return userDataService.GetUserByClaimIdentityAsync(key).ConfigureAwait(false).GetAwaiter().GetResult();
         }
     }
 
