@@ -12,8 +12,12 @@ var inject = require('gulp-inject');
 var runSequence = require('run-sequence');
 var concat = require('gulp-concat');
 var autoprefix = require('gulp-autoprefixer');
+var replace = require('gulp-replace');
 var minifyCSS = require('gulp-minify-css');
 var minifyHtml = require('gulp-minify-html');
+var stripDebug = require('gulp-strip-debug');
+var uglify = require('gulp-uglify');
+var changed = require('gulp-changed');
 
 //required. Orelse the autoprefix will throw error.
 var Promise = require('es6-promise').Promise;
@@ -59,9 +63,55 @@ gulp.task('minify-css', function () {
       .pipe(gulp.dest(config.path.destCss));
 });
 
+gulp.task('minify-html', function () {
+    gulp.src([config.path.dest + "/**/*.html"])
+      .pipe(minifyHtml())
+      .pipe(gulp.dest(config.path.dest));
+});
+
+gulp.task('minify-scripts-app', function () {
+    gulp.src([config.path.app + '/**/*.js'])
+      .pipe(concat(config.path.appBundle))
+      .pipe(stripDebug())
+      .pipe(uglify())
+      .pipe(gulp.dest(config.path.dest));
+});
+
+gulp.task('minify-scripts-js', function () {
+    gulp.src([config.path.js + '/**/*.js'])
+      .pipe(concat(config.path.jsBundle))
+      .pipe(stripDebug())
+      .pipe(uglify())
+      .pipe(gulp.dest(config.path.dest));
+});
+
 gulp.task('_prepare-dev', function () {
     return runSequence('inject-css-dev', 'inject-js-dev', 'inject-appjs-dev');
 });
-//gulp.task('release-staging', function () {
-//    return runSequence('clean-dest-dir', 'minify-html', 'minify-scripts-app', 'minify-scripts-js', 'minify-css', 'replace-staging');
-//});
+
+var replaceStagingTask = function () {
+    return gulp.src([config.path.dest + '/' + config.path.appBundle, config.path.dest + '/' + config.path.jsBundle, config.path.dest + '/' + config.path.cssBundle])
+    .pipe(replace('http://localhost', 'http://staging'))
+    .pipe(replace('http://someother:1992/', 'http://staging:1992/'))
+    .pipe(gulp.dest(config.path.dest));
+};
+
+gulp.task('replace-staging', replaceStagingTask);
+
+
+// minify new or changed HTML pages
+gulp.task('copy-html', function () {
+    gulp.src([config.path.src + "/*.html"])
+      .pipe(changed(config.path.dest))
+      //.pipe(minifyHTML())
+      .pipe(gulp.dest(config.path.dest));
+
+    gulp.src([config.path.app + "/**/*.html"])
+      .pipe(changed(config.path.destApp))
+      //.pipe(minifyHTML())
+      .pipe(gulp.dest(config.path.destApp));
+});
+
+gulp.task('_release-staging', function () {
+    return runSequence('clean-dest-dir','copy-html', 'minify-html', 'minify-scripts-app', 'minify-scripts-js', 'minify-css', 'replace-staging');
+});

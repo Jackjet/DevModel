@@ -12,6 +12,6 @@
     "angular-ui-select": "^0.12.100",
     "bootstrap": "^3.3.6",
     "angular-bootstrap": "^0.12.2",
-    "jquery": "~2" 
+    "jquery": "~2"  
   }
 }
