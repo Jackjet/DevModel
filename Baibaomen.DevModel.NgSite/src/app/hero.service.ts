@@ -8,4 +8,8 @@ export class HeroService {
         //return Promise.resolve(HEROES);
         return new Promise(resolve => setTimeout(() => resolve(HEROES), 500));
     }
+
+    getHero(id: number): Promise<Hero> {
+        return new Promise(resolve => setTimeout(() => resolve(HEROES.find(h => h.id === id)), 500));
+    }
 }
