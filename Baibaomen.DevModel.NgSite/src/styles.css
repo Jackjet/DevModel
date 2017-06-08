@@ -20,3 +20,12 @@ body, input[text], button {
 * {
     font-family: Arial, Helvetica, sans-serif;
 }
+
+
+.ng-dirty.ng-valid {
+    border-left: 5px solid #28cc68;
+}
+
+.ng-dirty.ng-invalid {
+    border-left:5px solid #ff0000;
+}
